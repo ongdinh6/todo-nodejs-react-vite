@@ -3,12 +3,10 @@
         "esModuleInterop": true,
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
-        "outDir": "dist",
         "sourceMap": true,
-        "strict": true,
-        "skipLibCheck": true,
         "target": "ES6",
+        "outDir": "../../dist",
+        "strict": true
     },
-    "include": ["packages/**/*.ts"],
-    "exclude": ["node_modules"]
+    "include": ["src/**/*.ts"]
 }
