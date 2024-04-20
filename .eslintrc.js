@@ -18,7 +18,7 @@ module.exports = {
         "semi": "warn",
         "space-in-parens": "warn",
         "prefer-const": "warn",
-        "no-undef": "off"
+        "no-undef": "off",
     },
     "env": {
         "node": true

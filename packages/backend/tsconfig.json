@@ -6,7 +6,15 @@
         "sourceMap": true,
         "target": "ES6",
         "outDir": "../../dist",
-        "strict": true
+        "strict": true,
+        "baseUrl": "./",
+        "paths": {
+          "@controllers/*": ["src/controllers/*"],
+          "@services/*": ["src/services/*"],
+          "@entities/*": ["src/entities/*"],
+          "@/*": ["src/*"],
+        }
     },
-    "include": ["src/**/*.ts"]
+    "traceResolution": true,
+    "include": ["src/**/*.ts"],
 }
