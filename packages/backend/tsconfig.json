@@ -6,15 +6,16 @@
         "sourceMap": true,
         "target": "ES6",
         "outDir": "../../dist",
+        "rootDir": "src",
         "strict": true,
-        "baseUrl": "./",
+        "allowImportingTsExtensions": true,
+
         "paths": {
           "@controllers/*": ["src/controllers/*"],
           "@services/*": ["src/services/*"],
           "@entities/*": ["src/entities/*"],
-          "@/*": ["src/*"],
+          "@/*": ["src/*"]
         }
     },
-    "traceResolution": true,
-    "include": ["src/**/*.ts"],
+    "include": ["src/**/*.ts"]
 }

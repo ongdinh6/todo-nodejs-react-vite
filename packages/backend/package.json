@@ -3,13 +3,33 @@
     "version": "1.0.0",
     "private": true,
     "main": "index.js",
+    "type": "commonjs",
     "scripts": {
         "dev": "nodemon",
+        "test": "jest",
         "build": "tsc",
         "start": "node ../../dist/index.js"
     },
-    "_moduleAliases": {
-      "@modules": "dist/src/modules",
-      "@services": "dist/services"
+    "jest": {
+        "preset": "ts-jest",
+        "testEnvironment": "node",
+        "roots": ["<rootDir>/__test__"],
+        "transform": {
+            "^.+\\.ts?$": "ts-jest"
+        },
+        "moduleNameMapper": {
+            "^@controllers/(.*)$": "<rootDir>/src/controllers/$1",
+            "^@services/(.*)$": "<rootDir>/src/services/$1",
+            "^@entities/(.*)$": "<rootDir>/src/entities/$1",
+            "^@/(.*)$": "<rootDir>/src/$1"
+        }
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.19.2"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.17",
+        "@types/express": "^4.17.21"
     }
 }
