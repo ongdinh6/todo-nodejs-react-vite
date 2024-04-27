@@ -6,23 +6,9 @@
     "type": "commonjs",
     "scripts": {
         "dev": "nodemon",
-        "test": "jest",
+        "test": "jest --setupFiles ./jest.config.js --detectOpenHandles",
         "build": "tsc",
         "start": "node ../../dist/index.js"
-    },
-    "jest": {
-        "preset": "ts-jest",
-        "testEnvironment": "node",
-        "roots": ["<rootDir>/__test__"],
-        "transform": {
-            "^.+\\.ts?$": "ts-jest"
-        },
-        "moduleNameMapper": {
-            "^@controllers/(.*)$": "<rootDir>/src/controllers/$1",
-            "^@services/(.*)$": "<rootDir>/src/services/$1",
-            "^@entities/(.*)$": "<rootDir>/src/entities/$1",
-            "^@/(.*)$": "<rootDir>/src/$1"
-        }
     },
     "dependencies": {
         "cors": "^2.8.5",

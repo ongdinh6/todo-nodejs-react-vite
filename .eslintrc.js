@@ -14,11 +14,20 @@ module.exports = {
     },
     "rules": {
         "@typescript-eslint/no-explicit-any": "warn",
-        "@typescript-eslint/no-unused-vars": "off",
+        // This config will skip the parameter match _
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            {
+                argsIgnorePattern: "^_",
+                varsIgnorePattern: "^_",
+                caughtErrorsIgnorePattern: "^_",
+            },
+        ],
         "semi": "warn",
         "space-in-parens": "warn",
         "prefer-const": "warn",
         "no-undef": "off",
+        "no-unused-vars": "off"
     },
     "env": {
         "node": true

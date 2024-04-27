@@ -1,21 +1,10 @@
 {
-    "compilerOptions": {
-        "esModuleInterop": true,
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
-        "sourceMap": true,
-        "target": "ES6",
-        "outDir": "../../dist",
-        "rootDir": "src",
-        "strict": true,
-        "allowImportingTsExtensions": true,
-
-        "paths": {
-          "@controllers/*": ["src/controllers/*"],
-          "@services/*": ["src/services/*"],
-          "@entities/*": ["src/entities/*"],
-          "@/*": ["src/*"]
-        }
-    },
-    "include": ["src/**/*.ts"]
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "paths": {
+      "@controllers/*": ["./src/controllers/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@/*": ["./src/*"]
+    }
+  }
 }

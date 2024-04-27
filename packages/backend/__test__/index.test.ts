@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "@/index.ts";
+import app from "@/index";
 
 describe("Express App", () => {
   it("responds to /api/hello", async () => {
