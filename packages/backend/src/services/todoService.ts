@@ -1,9 +1,9 @@
-import TodoEntity from "@entities/todoEntity";
+import TodoModel from "../models/todoModel";
 
 class TodoService {
   constructor() {}
 
-  static getListTodo(): TodoEntity[] {
+  static getListTodo(): TodoModel[] {
     return [];
   }
 }

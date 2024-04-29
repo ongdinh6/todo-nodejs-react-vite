@@ -1,6 +1,6 @@
-class TodoEntity {
+class TodoModel {
   declare id: string;
   declare name: string;
 }
 
-export default TodoEntity;
+export default TodoModel;

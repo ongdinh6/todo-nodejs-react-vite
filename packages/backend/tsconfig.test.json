@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "outDir": "../../dist",
     "baseUrl": ".",
     "rootDir": "src",
     "paths": {
@@ -10,6 +9,5 @@
       "@utils/*": ["src/utils/*"],
       "@/*": ["src/*"]
     }
-  },
-  "exclude": ["__test__"]
+  }
 }

@@ -1,17 +1,7 @@
-import { Request, Response, Router } from "express";
+import { Request, Response } from "express";
 
 class TodoController {
-  router = Router();
-
-  constructor() {
-    this.initialize();
-  }
-
-  private initialize() {
-    this.router.get("/", this.getListTodo);
-  }
-
-  getListTodo(_req: Request, res: Response) {
+  static getListTodo(_req: Request, res: Response) {
     res.json([
       { id: "todo1", name: "Setup project" },
       { id: "todo2", name: "Verify build, start project" },
@@ -19,4 +9,4 @@ class TodoController {
   }
 }
 
-export default new TodoController().router;
+export default TodoController;

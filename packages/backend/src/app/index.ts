@@ -1,13 +1,11 @@
-import express from "express";
+import { Sequelize } from "sequelize-typescript";
 
 class Application {
-  server = express();
-
   constructor() {}
 
-  routers() {}
-
   middlewares() {}
+
+  routes() {}
 }
 
 export default Application;

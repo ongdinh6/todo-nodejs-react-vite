@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev:backend": "npm run dev -w backend",
     "dev:frontend": "npm run dev -w frontend",
@@ -26,6 +26,12 @@
   "workspaces": [
     "packages/*"
   ],
+  "_moduleAliases": {
+    "@controllers": "dist/controllers",
+    "@entities": "dist/entities",
+    "@utils": "dist/utils",
+    "@": "dist"
+  },
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/supertest": "^6.0.2",
@@ -45,6 +51,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "supertest": "^6.3.4"
   }
 }

@@ -1,10 +1,13 @@
+import "module-alias/register";
 import express from "express";
 import path from "path";
 import cors from "cors";
-import todoRoutes from "@controllers/todoController";
+import Environment from "@utils/environment";
 
 const app = express();
-const port = 8080;
+
+const env = Environment.getInstance();
+const port = env.getEnv("PORT", "8080");
 
 const staticDir = path.join(__dirname, "public");
 
@@ -12,8 +15,6 @@ app.use(express.static(staticDir));
 
 // middlewares
 app.use(cors());
-
-app.use("/api/todos", todoRoutes);
 
 app.get("/api/hello", (req, res) => {
   const { name } = req.query;
