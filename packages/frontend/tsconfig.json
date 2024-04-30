@@ -22,7 +22,8 @@
     "baseUrl": ".",
     "rootDir": "src",
     "types": [
-      "jest"
+      "jest",
+      "vite/client"
     ],
     "paths": {
       "@/*": ["src/*"]
