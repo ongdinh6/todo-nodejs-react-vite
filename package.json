@@ -27,11 +27,20 @@
     "packages/*"
   ],
   "_moduleAliases": {
-    "@controllers": "dist/controllers",
-    "@entities": "dist/entities",
-    "@utils": "dist/utils",
-    "@": "dist"
+    "app": "dist/app",
+    "controllers": "dist/controllers",
+    "database": "dist/database",
+    "middlewares": "dist/middlewares",
+    "models": "dist/models",
+    "routes": "dist/routes",
+    "services": "dist/services",
+    "utils": "dist/utils"
   },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not dead"
+  ],
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/supertest": "^6.0.2",

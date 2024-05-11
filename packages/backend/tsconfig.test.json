@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "allowSyntheticDefaultImports": true,
+    "target": "esnext", // Adjust target as needed
+    "lib": ["dom", "dom.iterable", "esnext"], // Adjust lib as needed
     "baseUrl": ".",
-    "rootDir": "src",
+    "rootDir": ".",
+    "types": ["jest", "@types/node"],
     "paths": {
-      "@controllers/*": ["src/controllers/*"],
-      "@entities/*": ["src/entities/*"],
-      "@utils/*": ["src/utils/*"],
-      "@/*": ["src/*"]
+      "*": ["src/*"]
     }
   }
 }

@@ -2,14 +2,15 @@ module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
   roots: ["<rootDir>/__test__"],
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   transform: {
     "^.+\\.ts?$": "ts-jest",
   },
   moduleNameMapper: {
-    "^@controllers/(.*)$": "<rootDir>/src/controllers/$1",
-    "^@services/(.*)$": "<rootDir>/src/services/$1",
-    "^@entities/(.*)$": "<rootDir>/src/entities/$1",
-    "^@utils/(.*)$": "<rootDir>/src/utils/$1",
-    "^@/(.*)$": "<rootDir>/src/$1",
+    "^/(.*)$": "<rootDir>/src/$1",
   },
+  moduleDirectories: [
+    "src",
+    "node_modules"
+  ]
 };

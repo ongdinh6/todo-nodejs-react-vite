@@ -3,7 +3,7 @@
     "esModuleInterop": true,
     "jsx": "react",
     "paths": {
-      "@/*": ["./src/*"]
+      "*": ["src/*"]
     }
   },
   "include": ["__test__", "__mock__"]

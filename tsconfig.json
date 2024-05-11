@@ -19,10 +19,11 @@
     "rootDir": ".",
     "types": [
       "node",
-      "jest"
+      "jest",
+      "@types/node"
     ],
     "paths": {
-
+      "^(.*)$": ["<rootDir>/$1"]
     }
   },
   "include": ["packages/**/*.(ts|tsx)"],

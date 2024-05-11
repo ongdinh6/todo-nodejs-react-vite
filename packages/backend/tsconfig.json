@@ -1,15 +1,20 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "outDir": "../../dist",
     "baseUrl": ".",
     "rootDir": "src",
+    "declaration": false,
+    "types": [
+      "jest",
+      "@types/node"
+    ],
     "paths": {
-      "@controllers/*": ["src/controllers/*"],
-      "@entities/*": ["src/entities/*"],
-      "@utils/*": ["src/utils/*"],
-      "@/*": ["src/*"]
+      "*": ["src/*"]
     }
   },
+  "include": ["src", "src/types"],
   "exclude": ["__test__"]
 }
