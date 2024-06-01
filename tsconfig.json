@@ -16,7 +16,6 @@
     "outDir": "../../dist",
     "jsx": "react",
     "baseUrl": ".",
-    "rootDir": ".",
     "types": [
       "node",
       "jest",

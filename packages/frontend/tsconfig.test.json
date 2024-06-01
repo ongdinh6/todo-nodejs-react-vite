@@ -2,9 +2,15 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "jsx": "react",
+    "lib": ["ES6", "DOM", "DOM.Iterable"],
+    "types": [
+      "jest",
+      "vite/client"
+    ],
+    "baseUrl": ".",
     "paths": {
       "*": ["src/*"]
-    }
+    },
   },
-  "include": ["__test__", "__mock__"]
+  "include": ["__test__", "__mock__"],
 }

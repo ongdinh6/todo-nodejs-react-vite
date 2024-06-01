@@ -18,7 +18,7 @@ class Environment {
     // Load the config env paths
   }
 
-  getEnv(name: string, defaultValue?: string): string {
+  get(name: string, defaultValue?: string): string {
     if (defaultValue) {
       return process.env[name] ?? defaultValue;
     }

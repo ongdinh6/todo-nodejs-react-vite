@@ -28,14 +28,14 @@ app.get("/bye", async (req, res, next) => {
   res.send("Good Bye. See you soon!");
 });
 
-const isLocal = env.getEnv("LOCAL"); // replaced by env
+const isLocal = env.get("LOCAL"); // replaced by env
 if (!isLocal) {
   app.get("/*", (_req, res) => {
     res.sendFile(staticDir + "/index.html");
   });
 }
 // server index
-const port = env.getEnv("PORT", "8080");
+const port = env.get("PORT", "8080");
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

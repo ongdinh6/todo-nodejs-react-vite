@@ -1,33 +1,29 @@
-import sequelize from "sequelize";
 import { Sequelize } from "sequelize-typescript";
+import Environment from "utils/environment";
 
-class Connection {
-  database: string;
-  server: string;
-  port: number;
-  username: string;
-  password: string;
-  option: object;
+class DatabaseConnection {
+  sequelize: Sequelize;
 
-  constructor(database: string, server: string, port: number, username: string, password: string) {
-    this.database = database;
-    this.server = server;
-    this.port = port;
-    this.username = username;
-    this.password = password;
-  }
-
-  connect(): Sequelize {
-    return new Sequelize({
-      database: this.database,
+  constructor(database: string, server: string, port: string, username: string, password: string) {
+    this.sequelize = new Sequelize({
+      database: database,
       dialect: "mssql",
-      username: this.username,
-      password: this.password,
-      host: this.server,
-      port: this.port,
+      username: username,
+      password: password,
+      host: server,
+      port: Number(port),
       models: [__dirname + "/models"],
     });
   }
 }
 
-export default Connection;
+const runtimeEnv = Environment.getInstance();
+const dbConnection = new DatabaseConnection(
+  runtimeEnv.get("DB_DATABASE"),
+  runtimeEnv.get("DB_SERVER"),
+  runtimeEnv.get("DB_PORT"),
+  runtimeEnv.get("DB_USERNAME"),
+  runtimeEnv.get("DB_PASSWORD"),
+).sequelize;
+
+export default dbConnection;

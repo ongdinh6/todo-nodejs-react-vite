@@ -1,21 +1,23 @@
-// frontend/__test__/App.test.tsx
-
-import React from "react";
+import { describe, expect, it } from "@jest/globals";
 import { render } from "@testing-library/react";
-import App from "App";
 import { BrowserRouter } from "react-router-dom";
-
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useContext: jest.fn().mockReturnValue({ basename: "/" }), // Provide a fake basename
-}));
+import React from "react";
+import App from "App";
 
 describe("App", () => {
+  beforeAll(() => {
+    jest.mock("react-router-dom", () => ({
+      ...jest.requireActual("react-router-dom"),
+      useContext: jest.fn().mockReturnValue({ basename: "/" }), // Provide a fake basename
+    }));
+  });
 
-  it("Should render App", async () => {
-    const { container } = render(<BrowserRouter>
-      <App />
-    </BrowserRouter>);
+  it("should render App", () => {
+    const { container } = render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>,
+    );
     expect(container).toBeTruthy();
   });
 });

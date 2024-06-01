@@ -10,7 +10,7 @@ module.exports = {
   roots: ["packages/backend", "packages/frontend"],
   moduleNameMapper: {
     ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: "<rootDir>/" }),
-    "^(.*)$": "<rootDir>/$1",
+    "^/(.*)$": "<rootDir>/$1",
   },
   projects: ["./packages/*/"],
   transform: {

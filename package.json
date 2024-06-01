@@ -36,12 +36,8 @@
     "services": "dist/services",
     "utils": "dist/utils"
   },
-  "browserslist": [
-    "last 2 versions",
-    "> 1%",
-    "not dead"
-  ],
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.12",
     "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^7.7.0",

@@ -1,4 +1,4 @@
-import TodoModel from "../models/todoModel";
+import TodoModel from "models/todoModel";
 
 class TodoService {
   constructor() {}
