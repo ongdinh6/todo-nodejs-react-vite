@@ -1,0 +1,28 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "@fontsource/roboto/300.css";
+@import "@fontsource/roboto/400.css";
+@import "@fontsource/roboto/500.css";
+@import "@fontsource/roboto/700.css";
+
+.main {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+
+  & header {
+    flex: 0 1 80px;
+  }
+
+  & main {
+    flex: 1 1 0;
+    overflow-y: auto;
+    background: #9ca3af;
+    top: 80px;
+  }
+
+  & footer {
+    flex: 0 1 80px;
+  }
+}

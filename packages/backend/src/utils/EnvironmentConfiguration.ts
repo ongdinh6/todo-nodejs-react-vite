@@ -1,15 +1,15 @@
 import * as process from "process";
 
-class Environment {
-  static INSTANCE: Environment;
+class EnvironmentConfiguration {
+  static INSTANCE: EnvironmentConfiguration;
 
   private constructor() {
     this.configEnv();
   }
 
-  static getInstance(): Environment {
+  static getInstance(): EnvironmentConfiguration {
     if (!this.INSTANCE) {
-      this.INSTANCE = new Environment();
+      this.INSTANCE = new EnvironmentConfiguration();
     }
     return this.INSTANCE;
   }
@@ -26,4 +26,4 @@ class Environment {
   }
 }
 
-export default Environment;
+export default EnvironmentConfiguration;

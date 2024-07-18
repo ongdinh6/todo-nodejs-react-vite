@@ -1,7 +1,8 @@
 import React from "react";
+import { Button, ButtonProps } from "@mui/material";
 
-const OutlinedButton = () => {
-  return <button>Outlined</button>;
+const OutlinedButton = (props: ButtonProps) => {
+  return <Button {...props} />;
 };
 
 export default OutlinedButton;
