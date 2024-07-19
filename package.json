@@ -32,6 +32,7 @@
     "database": "dist/database",
     "middlewares": "dist/middlewares",
     "models": "dist/models",
+    "repositories": "dist/repositories",
     "routes": "dist/routes",
     "services": "dist/services",
     "utils": "dist/utils"
