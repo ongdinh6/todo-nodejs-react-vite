@@ -1,13 +1,3 @@
-.theme.dark {
-    color: #000;
-    background: #fff;
-}
-
-.theme.white {
-    color: white;
-    background-color: #000;
-}
-
-.theme {
-    font-weight: 700;
+.product-list-wrapper {
+  margin: 0 50px;
 }

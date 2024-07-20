@@ -1,14 +1,17 @@
-import "module-alias/register";
+import "./aliasSetup";
+
 import express from "express";
-import productRoutes from "routes/ProductRoutes";
+
+import envConfig, { EnvConfig } from "utils/envConfig";
 
 const app = express();
 
-app.use("/api/products", productRoutes);
+const port = Number(envConfig.get(EnvConfig.SERVER_PORT, "8081"));
 
-
-app.listen(8080, () => {
-  console.log(`Server is running on port ${8080}`);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
+
+console.log("read: ", envConfig.get(EnvConfig.DB_CONNECTION_STRING))
 
 export default app;

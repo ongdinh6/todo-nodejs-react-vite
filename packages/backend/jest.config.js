@@ -9,8 +9,5 @@ module.exports = {
   moduleNameMapper: {
     "^/(.*)$": "<rootDir>/src/$1",
   },
-  moduleDirectories: [
-    "src",
-    "node_modules"
-  ],
+  moduleDirectories: ["src", "node_modules"],
 };

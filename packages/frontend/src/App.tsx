@@ -27,18 +27,20 @@ const App = () => {
       </footer>
     </Stack>
   );
-}
+};
 
 const AppRoutes = (): ReactElement => {
-  return <BrowserRouter>
-    <Routes>
-      <Route path={"/"} element={<App />}>
-        <Route index element={<HomePage />} />
-        <Route path={"list-products"} element={<ProductList />} />
-      </Route>
-      <Route path={"*"} element={<PageNotFound />} />
-    </Routes>
-  </BrowserRouter>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={"/"} element={<App />}>
+          <Route index element={<HomePage />} />
+          <Route path={"list-products"} element={<ProductList />} />
+        </Route>
+        <Route path={"*"} element={<PageNotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default AppRoutes;

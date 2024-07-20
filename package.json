@@ -16,7 +16,7 @@
     "test:coverage": "npm run test -- --coverage=true",
     "build": "rimraf dist & npm run build:frontend & npm run build:backend",
     "postbuild": "mv packages/frontend/dist dist/public",
-    "start": "node dist/index.js",
+    "start": "cross-env NODE_ENV=production node dist/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -43,6 +43,7 @@
     "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^7.7.0",
     "@typescript-eslint/parser": "^7.7.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
