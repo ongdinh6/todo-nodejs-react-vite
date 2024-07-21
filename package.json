@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "main": "dist/index.js",
+  "main": "dist/packages/backend/src/index.js",
   "scripts": {
     "dev:backend": "npm run dev -w backend",
     "dev:frontend": "npm run dev -w frontend",
@@ -15,8 +15,8 @@
     "test:watch": "jest --watchAll --notify",
     "test:coverage": "npm run test -- --coverage=true",
     "build": "rimraf dist & npm run build:frontend & npm run build:backend",
-    "postbuild": "mv packages/frontend/dist dist/public",
-    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "postbuild": "mv packages/frontend/dist dist/packages/backend/public",
+    "start": "cross-env NODE_ENV=production node dist/packages/backend/src/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -27,20 +27,21 @@
     "packages/*"
   ],
   "_moduleAliases": {
-    "app": "dist/app",
-    "controllers": "dist/controllers",
-    "database": "dist/database",
-    "middlewares": "dist/middlewares",
-    "models": "dist/models",
-    "repositories": "dist/repositories",
-    "routes": "dist/routes",
-    "services": "dist/services",
-    "utils": "dist/utils"
+    "app": "dist/packages/backend/src/app",
+    "controllers": "dist/packages/backend/src/controllers",
+    "database": "dist/packages/backend/src/database",
+    "middlewares": "dist/packages/backend/src/middlewares",
+    "models": "dist/packages/backend/src/models",
+    "repositories": "dist/packages/backend/src/repositories",
+    "routes": "dist/packages/backend/src/routes",
+    "services": "dist/packages/backend/src/services",
+    "utils": "dist/packages/backend/src/utils"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.12",
     "@types/supertest": "^6.0.2",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^7.7.0",
     "@typescript-eslint/parser": "^7.7.0",
     "cross-env": "^7.0.3",

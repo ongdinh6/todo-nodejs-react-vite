@@ -13,7 +13,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "useDefineForClassFields": true,
-    "outDir": "../../dist",
+    "outDir": "../../dist/packages/backend/src",
     "jsx": "react",
     "baseUrl": ".",
     "types": [
