@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
+    "target": "ES2021",
     "esModuleInterop": true,
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "outDir": "../../dist",
+    "outDir": "../../dist/packages/backend/src",
     "baseUrl": ".",
     "rootDir": "src",
     "declaration": false,

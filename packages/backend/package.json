@@ -2,26 +2,28 @@
     "name": "backend",
     "version": "1.0.0",
     "private": true,
-    "main": "../../dist/index.js",
+    "main": "../../dist/packages/backend/src/index.js",
     "type": "commonjs",
     "scripts": {
         "dev": "nodemon",
         "test": "jest --setupFiles ./jest.config.js --detectOpenHandles",
         "build": "tsc",
-        "start": "cross-env NODE_ENV=production node ../../dist/index.js"
+        "postbuild": "cp .env.production ../../dist/packages/backend && cp .env ../../dist/packages/backend",
+        "start": "cross-env NODE_ENV=production node ../../dist/packages/backend/src/index.js"
     },
     "_moduleAliases": {
-        "app": "../../dist/app",
-        "controllers": "../../dist/controllers",
-        "database": "../../dist/database",
-        "middlewares": "../../dist/middlewares",
-        "models": "../../dist/models",
-        "repositories": "../../dist/repositories",
-        "routes": "../../dist/routes",
-        "services": "../../dist/services",
-        "utils": "../../dist/utils"
+        "app": "../../dist/packages/backend/src/app",
+        "controllers": "../../dist/packages/backend/src/controllers",
+        "database": "../../dist/packages/backend/src/database",
+        "middlewares": "../../dist/packages/backend/src/middlewares",
+        "models": "../../dist/packages/backend/src/models",
+        "repositories": "../../dist/packages/backend/src/repositories",
+        "routes": "../../dist/packages/backend/src/routes",
+        "services": "../../dist/packages/backend/src/services",
+        "utils": "../../dist/packages/backend/src/utils"
     },
     "dependencies": {
+        "@launchdarkly/node-server-sdk": "^9.4.7",
         "cors": "^2.8.5",
         "express": "^4.19.2",
         "module-alias": "^2.2.3",

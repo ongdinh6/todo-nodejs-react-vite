@@ -10,6 +10,7 @@ import { TimesProvider } from "stores/providers.tsx";
 import { Stack } from "@mui/material";
 
 import styles from "./Index.module.css";
+import AdminPage from "pages/AdminPage";
 
 const App = () => {
   return (
@@ -29,6 +30,20 @@ const App = () => {
   );
 };
 
+const AdminLayout = () => {
+  return (
+    <Stack direction={"column"} className={styles.main}>
+      <header className={"flex-0"}>Admin Header</header>
+      <main className={"flex-1"}>
+        <Outlet />
+      </main>
+      <footer>
+        <PageFooter />
+      </footer>
+    </Stack>
+  );
+};
+
 const AppRoutes = (): ReactElement => {
   return (
     <BrowserRouter>
@@ -36,6 +51,9 @@ const AppRoutes = (): ReactElement => {
         <Route path={"/"} element={<App />}>
           <Route index element={<HomePage />} />
           <Route path={"list-products"} element={<ProductList />} />
+        </Route>
+        <Route path={"/admin"} element={<AdminLayout />}>
+          <Route index element={<AdminPage />} />
         </Route>
         <Route path={"*"} element={<PageNotFound />} />
       </Routes>

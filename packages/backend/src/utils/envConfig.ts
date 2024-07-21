@@ -12,6 +12,10 @@ export class EnvConfig {
   static readonly DB_PORT = "DB_PORT";
   static readonly DB_SCHEMA = "DB_SCHEMA";
   static readonly SERVER_PORT = "SERVER_PORT";
+  static readonly LD_SERVER_SDK = "LD_SERVER_SDK";
+  static readonly LD_PROJECT_KEY = "LD_PROJECT_KEY";
+  static readonly LD_AUTHORIZATION = "LD_AUTHORIZATION";
+  static readonly LD_ENVIRONMENT_KEY = "LD_ENVIRONMENT_KEY";
 
   constructor() {
     const defaultEnvPath = path.resolve(__dirname, "../../.env");
@@ -30,7 +34,7 @@ export class EnvConfig {
   }
 
   static loadEnvFiles(filePaths: string[]) {
-    filePaths.forEach(filePath => {
+    filePaths.forEach((filePath) => {
       if (fs.existsSync(filePath)) {
         const envConfig = dotenv.parse(fs.readFileSync(filePath));
         for (const k in envConfig) {

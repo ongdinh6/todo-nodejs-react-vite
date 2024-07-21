@@ -16,7 +16,9 @@
     "@fontsource/roboto": "^5.0.13",
     "@mui/icons-material": "^5.15.19",
     "@mui/material": "^5.15.19",
+    "axios": "^1.7.2",
     "classnames": "^2.5.1",
+    "launchdarkly-react-client-sdk": "^3.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.0"
