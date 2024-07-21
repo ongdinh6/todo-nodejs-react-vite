@@ -12,6 +12,7 @@ const renderApp = async () => {
   console.log("VITE_LD_CLIENT_SIDE: ", envConfig.get(EnvConfig.VITE_LD_CLIENT_SIDE));
   const LDProvider = await asyncWithLDProvider({
     clientSideID: envConfig.get(EnvConfig.VITE_LD_CLIENT_SIDE),
+    timeout: 5000
   });
 
   ReactDOM.createRoot(document.getElementById("root")!).render(

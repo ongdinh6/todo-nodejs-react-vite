@@ -8,7 +8,9 @@ class LdClient {
   getClient = async (): Promise<LaunchDarkly.LDClient> => {
     const sdkKey = envConfig.get(EnvConfig.LD_SERVER_SDK);
     const client = LaunchDarkly.init(sdkKey);
-    await client.waitForInitialization();
+    await client.waitForInitialization({
+      timeout: 5000,
+    });
     return client;
   }
 
@@ -19,7 +21,7 @@ class LdClient {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json; domain-model=launchdarkly.semanticpatch",
-          Authorization: envConfig.get(EnvConfig.LD_SERVER_SDK),
+          Authorization: envConfig.get(EnvConfig.LD_AUTHORIZATION),
         },
         body: JSON.stringify({
           environmentKey: envConfig.get(EnvConfig.LD_ENVIRONMENT_KEY),
