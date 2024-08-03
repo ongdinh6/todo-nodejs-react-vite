@@ -5,6 +5,8 @@ import { useFlags } from "launchdarkly-react-client-sdk";
 const HomePage = (): ReactElement => {
   const { hideWelcomeMesssage } = useFlags();
 
+  console.log("@@@@@@HomePage re-rendered!!!!")
+
   return (
     <Box>
       <p>Home Page</p>

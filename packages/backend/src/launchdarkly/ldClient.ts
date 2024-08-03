@@ -1,11 +1,16 @@
 import * as LaunchDarkly from "@launchdarkly/node-server-sdk";
 
 import envConfig, { EnvConfig } from "utils/envConfig";
+import { FEATURE_FLAG_KEY } from "launchdarkly/featureFlag";
 
 class LdClient {
-  private ldClient: LaunchDarkly.LDClient;
+  private ldClient: LaunchDarkly.LDClient | null = null;
 
-  getClient = async (): Promise<LaunchDarkly.LDClient> => {
+  /**
+   * The LDClient must be singleton
+   * Read more:
+   **/
+  private getClient = async (): Promise<LaunchDarkly.LDClient> => {
     const sdkKey = envConfig.get(EnvConfig.LD_SERVER_SDK);
     const client = LaunchDarkly.init(sdkKey);
     await client.waitForInitialization({
@@ -47,7 +52,7 @@ class LdClient {
   allFlags = () => {};
 
   getFlagValue = async (
-    key: string,
+    key: FEATURE_FLAG_KEY,
     user?: LaunchDarkly.LDContext,
     defaultValue: boolean = false
   ): Promise<LaunchDarkly.LDFlagValue> => {

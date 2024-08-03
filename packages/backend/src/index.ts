@@ -10,7 +10,7 @@ const app = express();
 
 app.use("/api", apiRoutes);
 
-FeatureToggleService.syncUpDatabase().then((r) => console.log("Sync feature toggle to the database. ", r));
+FeatureToggleService.syncUpDatabase().catch(e => console.error(e));
 
 const port = Number(envConfig.get(EnvConfig.SERVER_PORT, "8081"));
 app.listen(port, () => {

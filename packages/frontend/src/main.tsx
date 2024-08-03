@@ -1,27 +1,35 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { StyledEngineProvider } from "@mui/material";
-import { asyncWithLDProvider } from "launchdarkly-react-client-sdk";
+import { withLDProvider } from "launchdarkly-react-client-sdk";
 
 import AppRoutes from "App.tsx";
-import envConfig, { EnvConfig } from "envConfig.ts";
+import { EnvConfig } from "envConfig.ts";
 
 import "./App.css";
+import ErrorBoundary from "ErrorBoundary.tsx";
+import { SnackbarProvider } from "stores/contexts.tsx";
 
-const renderApp = async () => {
-  console.log("VITE_LD_CLIENT_SIDE: ", envConfig.get(EnvConfig.VITE_LD_CLIENT_SIDE));
-  const LDProvider = await asyncWithLDProvider({
-    clientSideID: envConfig.get(EnvConfig.VITE_LD_CLIENT_SIDE),
-    timeout: 5000
-  });
-
-  ReactDOM.createRoot(document.getElementById("root")!).render(
-    <StyledEngineProvider injectFirst>
-      <LDProvider>
+const App = () => {
+  return (
+    // <ErrorBoundary fallback={"Something went wrong!!!"}>
+      <SnackbarProvider>
         <AppRoutes />
-      </LDProvider>
-    </StyledEngineProvider>,
+      </SnackbarProvider>
+    // </ErrorBoundary>
   );
 };
 
-renderApp().catch((error) => console.error("App Error: ", error));
+const TIMEOUT_IN_SECONDS = 2;
+
+const LDProvider = withLDProvider({
+  clientSideID: EnvConfig.get("VITE_LD_CLIENT_SIDE_ID"),
+  timeout: TIMEOUT_IN_SECONDS
+})(App);
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <StyledEngineProvider injectFirst>
+    <LDProvider />
+  </StyledEngineProvider>,
+);
+

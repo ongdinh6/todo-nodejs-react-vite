@@ -9,7 +9,7 @@ export default defineConfig(function () {
     plugins: [react(), tsconfigPaths()],
     css: {
       modules: {
-        localsConvention: "camelCaseOnly",
+        localsConvention: "camelCase",
       },
       preprocessorOptions: {
         postcss: {

@@ -12,7 +12,7 @@ type ListTogglesProps = {
 const ListToggles = ({ toggles }: ListTogglesProps): ReactElement => {
   return (
     <List>
-      {toggles.map((toggle) => (
+      {toggles?.map((toggle) => (
         <ListItem key={uuid()}>
           <FeatureToggleItem featureToggle={toggle} />
         </ListItem>

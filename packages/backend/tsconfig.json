@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
+    "target": "ES6",
+    "experimentalDecorators": true,
     "esModuleInterop": true,
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
@@ -8,6 +9,7 @@
     "baseUrl": ".",
     "rootDir": "src",
     "declaration": false,
+    "strict": true,
     "types": [
       "jest",
       "@types/node"

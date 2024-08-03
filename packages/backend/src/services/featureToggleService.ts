@@ -76,9 +76,7 @@ class FeatureToggleService {
     const toggleResponses: FeatureToggleResponse[] = [];
     this.FEATURE_TOGGLES.forEach((toggle) => {
       if (dbKeys.includes(toggle.name) && togglesInEnv.hasOwnProperty(toggle.name)) {
-        toggle.value = togglesInDB
-          .find((featureToggle) => featureToggle.getDataValue("name") === toggle.name)
-          .getDataValue("value");
+        toggle.value = togglesInDB.find((featureToggle) => featureToggle.getDataValue("name") === toggle.name)?.getDataValue("value") ?? ""
         toggleResponses.push(toggle);
       }
     });

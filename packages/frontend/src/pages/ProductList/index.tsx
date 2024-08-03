@@ -6,7 +6,7 @@ import { Product } from "apis/product/type.ts";
 import CommentCard from "components/shared/CommentCard";
 import SearchInput from "components/shared/SearchInput";
 import CreateNewProductModal from "components/modal/CreateNewProductModal";
-import { PRODUCT_MODALS } from "types/modals";
+import { PRODUCT_MODALS } from "commonType/modals";
 import { randomKey } from "utils/strings.ts";
 
 import styles from "./styles.module.css";

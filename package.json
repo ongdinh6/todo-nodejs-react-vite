@@ -30,6 +30,7 @@
     "app": "dist/packages/backend/src/app",
     "controllers": "dist/packages/backend/src/controllers",
     "database": "dist/packages/backend/src/database",
+    "launchdarkly": "dist/packages/backend/src/launchdarkly",
     "middlewares": "dist/packages/backend/src/middlewares",
     "models": "dist/packages/backend/src/models",
     "repositories": "dist/packages/backend/src/repositories",

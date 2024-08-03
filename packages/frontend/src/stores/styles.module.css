@@ -1,0 +1,29 @@
+/* snackbar.module.css */
+.snackbar-container {
+    position: fixed;
+    bottom: 20px; /* Position from the bottom */
+    right: 20px;  /* Position from the right */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column; /* Stack vertically */
+    gap: 10px; /* Space between snackbars */
+}
+
+.snackbar {
+    color: white;
+    padding: 16px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: opacity 0.3s ease; /* Optional: for fade effect */
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}

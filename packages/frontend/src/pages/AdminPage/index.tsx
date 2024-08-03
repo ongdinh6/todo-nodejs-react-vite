@@ -10,7 +10,7 @@ const featureToggleClient = new FeatureToggleAPI();
 const AdminPage = (): ReactElement => {
   const [featureToggles, setFeatureToggles] = useState<FeatureToggle[]>([]);
   // const ldClient = useLDClient();
-
+  //
   // useEffect(() => {
   //   if (ldClient) {
   //     const allFlags = ldClient.allFlags();
