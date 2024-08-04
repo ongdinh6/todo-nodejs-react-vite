@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useSnackbar } from "stores/contexts.tsx";
 
 const axiosInstance = axios.create({
   baseURL: "",
@@ -15,7 +14,6 @@ axiosInstance.interceptors.request.use(
   },
   function (error) {
     // Do something with request error
-    console.log("@@@@@@Axios Request error: ", error);
   },
 );
 
@@ -30,16 +28,6 @@ axiosInstance.interceptors.response.use(
     // Do something with response error
     if (error.response) {
       // Error response from the server
-      const status = error.response.status;
-      const message = error.response.data?.message || 'An error occurred';
-
-      console.log("@@@@@Error Response Axios: ", error);
-      // Dispatch an action or call a function to show Snackbar
-      // For simplicity, we assume there's a global snackbar context
-      if (status >= 400 && status <= 500) {
-        // const { showSnackbar } = useSnackbar(); // Hook to show snackbar
-        // showSnackbar({ message, severity: "error" });
-      }
     }
 
     return Promise.reject(error as Error);

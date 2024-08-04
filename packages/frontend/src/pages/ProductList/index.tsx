@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Box, Button, Grid } from "@mui/material";
-import { useFlags } from "launchdarkly-react-client-sdk";
 
 import { Product } from "apis/product/type.ts";
 import CommentCard from "components/shared/CommentCard";
@@ -46,8 +45,6 @@ const products: Product[] = [
 
 const ProductList = () => {
   const [modal, setModal] = useState<string | null>(null);
-  const { enableAddNewProduct } = useFlags();
-
 
   const handleOpenModal = (modal: string) => {
     setModal(modal);
@@ -61,19 +58,18 @@ const ProductList = () => {
     <Box className={styles.productListWrapper}>
       <Grid>
         <SearchInput placeholder="Search book..." />
-        {enableAddNewProduct && <Button
+        <Button
           variant={"contained"}
           className={"normal-case rounded-full"}
           onClick={() => handleOpenModal(PRODUCT_MODALS.CREATE_NEW_PRODUCT)}
         >
           Add new product
-        </Button>}
+        </Button>
       </Grid>
 
       {products.map((product) => (
         <CommentCard
           key={randomKey()}
-          className={"m-2"}
           name={product.name}
           date={product.date}
           comment={product.comment}

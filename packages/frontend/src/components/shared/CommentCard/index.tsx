@@ -1,10 +1,10 @@
 import React from "react";
 import { Card, CardContent, Typography, Avatar, Box, Stack } from "@mui/material";
 import { styled } from "@mui/system";
+import classNames from "classnames";
 
 import DeleteBtn from "components/shared/DeleteBtn";
 import EditBtn from "components/shared/EditBtn";
-import classNames from "classnames";
 
 interface CommentCardProps {
   name: string;
@@ -26,6 +26,8 @@ const StyledAvatar = styled(Avatar)({
 });
 
 const CommentCard: React.FC<CommentCardProps> = ({ name, date, comment, avatarUrl, className }) => {
+  const handleDelete = () => {};
+
   return (
     <StyledCard className={classNames(className, "space-x-2 flex")}>
       <StyledAvatar className={"m-auto"} src={avatarUrl} alt={name}>
@@ -43,7 +45,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ name, date, comment, avatarUr
         <Typography variant="body1">{comment}</Typography>
       </CardContent>
       <Stack className={"space-x-2 text-right m-auto"} direction={"row"}>
-        <DeleteBtn />
+        <DeleteBtn onClick={handleDelete} />
         <EditBtn />
       </Stack>
     </StyledCard>

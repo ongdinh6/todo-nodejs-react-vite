@@ -17,7 +17,7 @@ class LdClient {
       timeout: 5000,
     });
     return client;
-  }
+  };
 
   evaluate = async (featureFlagKey: string, value: string) => {
     const projectKey = envConfig.get(EnvConfig.LD_PROJECT_KEY);
@@ -37,7 +37,7 @@ class LdClient {
       if (resp.ok) {
         const responseBody = await resp.json();
         // Based on the response body when return 2xx status
-        return responseBody["environments"]["test"].on;
+        return (responseBody as { environments: { test: { on: boolean } } }).environments["test"].on;
       } else {
         const errorData = await resp.json();
         console.error("Error:", errorData);
@@ -54,7 +54,7 @@ class LdClient {
   getFlagValue = async (
     key: FEATURE_FLAG_KEY,
     user?: LaunchDarkly.LDContext,
-    defaultValue: boolean = false
+    defaultValue: boolean = false,
   ): Promise<LaunchDarkly.LDFlagValue> => {
     let flagValue: LaunchDarkly.LDFlagValue;
     if (!this.ldClient) this.ldClient = await this.getClient();
@@ -66,7 +66,7 @@ class LdClient {
     flagValue = await this.ldClient.variation(key, user, defaultValue);
     console.log("flagValue: ", flagValue);
     return flagValue;
-  }
+  };
 }
 
 const ldClient = new LdClient();

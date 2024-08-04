@@ -9,28 +9,31 @@ class Scheduler extends Model {
   declare updatedDate: Date;
 }
 
-Scheduler.init({
-  type: {
-    type: DataTypes.STRING,
-    primaryKey: true,
-    allowNull: false
+Scheduler.init(
+  {
+    type: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+      allowNull: false,
+    },
+    cronTime: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    updatedDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
   },
-  cronTime: {
-    type: DataTypes.STRING,
-    allowNull: false
+  {
+    sequelize,
+    tableName: "scheduler",
+    modelName: "Scheduler",
   },
-  description: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  updatedDate: {
-    type: DataTypes.DATE,
-    allowNull: false
-  }
-}, {
-  sequelize,
-  tableName: "scheduler",
-  modelName: "Scheduler"
-});
+);
 
 export default Scheduler;

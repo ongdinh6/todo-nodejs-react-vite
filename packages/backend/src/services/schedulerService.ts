@@ -12,7 +12,6 @@ class SchedulerService {
     this.runAsSchedule();
   }
 
-
   runAsSchedule = () => {
     if (this.indexingJob) {
       this.indexingJob.cancel();
@@ -21,17 +20,15 @@ class SchedulerService {
     this.indexingJob = schedule.scheduleJob(this.cronTime, () => {
       this.syncUpDatabase();
     });
-  }
+  };
 
   //  This method will be run at scheduled
   @Scheduled("*/5 * * * * *")
   syncUpDatabase = () => {
     console.log("Task executed after scheduled: ", new Date().toLocaleTimeString());
-  }
+  };
 
-  reschedule = (cronTime: string) => {
-
-  }
+  reschedule = (cronTime: string) => {};
 
   setOrUpdateSchedule = async (newTime: string, oldTime: string) => {
     try {
@@ -39,16 +36,15 @@ class SchedulerService {
         cronTime: newTime,
         type: "indexing",
         updatedDate: new Date(),
-        description: ""
+        description: "",
       });
       const newSchedule = await ScheduleRepository.upsert(scheduler, oldTime);
       this.reschedule(newTime);
       return newSchedule;
-    } catch(e) {
-     console.error(e);
+    } catch (e) {
+      console.error(e);
     }
-  }
+  };
 }
 
-const scheduleService = new SchedulerService();
-export default scheduleService;
+export default SchedulerService;

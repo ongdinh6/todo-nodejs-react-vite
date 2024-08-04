@@ -1,7 +1,6 @@
 import { Router } from "express";
 import ldClient from "launchdarkly/ldClient";
 import { FEATURE_FLAG_KEY } from "launchdarkly/featureFlag";
-import schedulerService from "services/schedulerService";
 
 const router = Router();
 
@@ -16,10 +15,10 @@ router.get("", async (_req, res) => {
 });
 
 router.put("/schedule/update", async (req, res) => {
-  const body = req.body;
-  const { newSchedule, oldSchedule } = body;
-  const updatedSchedule = await schedulerService.setOrUpdateSchedule(newSchedule, oldSchedule);
-  res.json(updatedSchedule);
-})
+  // const body = req.body;
+  // const { newSchedule, oldSchedule } = body;
+  // const updatedSchedule = await Sc.(newSchedule, oldSchedule);
+  // res.json(updatedSchedule);
+});
 
 export default router;

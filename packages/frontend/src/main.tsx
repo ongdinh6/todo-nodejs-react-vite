@@ -9,14 +9,15 @@ import { EnvConfig } from "envConfig.ts";
 import "./App.css";
 import ErrorBoundary from "ErrorBoundary.tsx";
 import { SnackbarProvider } from "stores/contexts.tsx";
+import InternalServerErrorPage from "pages/InternalServerErrorPage";
 
 const App = () => {
   return (
-    // <ErrorBoundary fallback={"Something went wrong!!!"}>
+    <ErrorBoundary fallback={<InternalServerErrorPage />}>
       <SnackbarProvider>
         <AppRoutes />
       </SnackbarProvider>
-    // </ErrorBoundary>
+    </ErrorBoundary>
   );
 };
 
@@ -24,7 +25,7 @@ const TIMEOUT_IN_SECONDS = 2;
 
 const LDProvider = withLDProvider({
   clientSideID: EnvConfig.get("VITE_LD_CLIENT_SIDE_ID"),
-  timeout: TIMEOUT_IN_SECONDS
+  timeout: TIMEOUT_IN_SECONDS,
 })(App);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -32,4 +33,3 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <LDProvider />
   </StyledEngineProvider>,
 );
-

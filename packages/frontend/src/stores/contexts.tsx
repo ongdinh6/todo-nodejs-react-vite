@@ -1,13 +1,14 @@
 import React, { ReactNode, createContext, useContext, FC, useState, useCallback, useMemo } from "react";
 import { Alert, Snackbar, Stack } from "@mui/material";
+import { v4 as uuid } from "uuid";
 
 import styles from "./styles.module.css";
 import { SnackbarCloseReason } from "@mui/material/Snackbar/Snackbar";
 
 interface SnackbarProps {
-  id: string;
-  message: string;
-  severity: 'success' | 'error' | 'info' | 'warning';
+  message: string | unknown;
+  severity: "success" | "error" | "info" | "warning";
+  id?: string;
 }
 
 interface SnackbarContextType {
@@ -19,7 +20,7 @@ export const SnackbarContext = createContext<SnackbarContextType | undefined>(un
 interface SnackbarItemProps {
   index: number;
   props: SnackbarProps;
-  onClose: (id: string) => void;
+  onClose: (id?: string) => void;
 }
 
 const SnackbarItem = ({ props, index, onClose }: SnackbarItemProps) => {
@@ -43,26 +44,29 @@ const SnackbarItem = ({ props, index, onClose }: SnackbarItemProps) => {
       onClose={handleAutoDismissed}
     >
       <Alert onClose={() => onClose(props.id)} severity={props.severity}>
-        {props.message}
+        <>{props.message}</>
       </Alert>
     </Snackbar>
   );
 };
 
-export const SnackbarProvider: FC<{ children: ReactNode, maxSnack?: number }> = ({ children, maxSnack = 5 }) => {
+export const SnackbarProvider: FC<{ children: ReactNode; maxSnack?: number }> = ({ children, maxSnack = 5 }) => {
   const [snackbars, setSnackbars] = useState<SnackbarProps[]>([]);
 
-  const showSnackbar = useCallback((props: SnackbarProps) => {
-    setSnackbars(prev => {
-      if (prev.length >= maxSnack) {
-        prev.pop(); // remove the top item (ordered bottom)
-      }
-      return [props, ...prev];
-    });
-  }, []);
+  const showSnackbar = useCallback(
+    (props: SnackbarProps) => {
+      setSnackbars((prev) => {
+        if (prev.length >= maxSnack) {
+          prev.pop(); // remove the top item (ordered bottom)
+        }
+        return [{ ...props, id: uuid() }, ...prev];
+      });
+    },
+    [maxSnack],
+  );
 
-  const handleClose = (id: string) => {
-    const newState = snackbars.filter(snackbar => snackbar.id !== id);
+  const handleClose = (id?: string) => {
+    const newState = snackbars.filter((snackbar) => snackbar.id !== id);
     setSnackbars(newState);
   };
 
@@ -72,7 +76,9 @@ export const SnackbarProvider: FC<{ children: ReactNode, maxSnack?: number }> = 
     <SnackbarContext.Provider value={value}>
       {children}
       <Stack spacing={2} sx={{ maxWidth: 600 }}>
-        {snackbars.map((snackbar, index) => (<SnackbarItem key={snackbar.id} index={index} props={snackbar} onClose={handleClose} />))}
+        {snackbars.map((snackbar, index) => (
+          <SnackbarItem key={snackbar.id} index={index} props={snackbar} onClose={handleClose} />
+        ))}
       </Stack>
     </SnackbarContext.Provider>
   );

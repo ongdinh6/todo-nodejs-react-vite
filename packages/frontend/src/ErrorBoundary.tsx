@@ -39,5 +39,6 @@ export default ErrorBoundary;
 
 function logErrorToMyService(error: Error, componentStack: string | null | undefined) {
   // Implement your logging logic here
-  console.error('Error logged:', error, componentStack);
+  // eslint-ignore @typescript-eslint/no-unused-vars
+  console.error("Error logged:", error, componentStack);
 }

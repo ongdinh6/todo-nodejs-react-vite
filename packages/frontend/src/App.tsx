@@ -12,6 +12,7 @@ import PageNotFound from "pages/ErrorPage/PageNotFound";
 import ProductList from "pages/ProductList";
 
 import styles from "./Index.module.css";
+import { useSnackbar } from "stores/contexts.tsx";
 
 const App = () => {
   return (
@@ -20,11 +21,13 @@ const App = () => {
         <PageHeader />
       </header>
       <main className={"flex-1"}>
-        <Outlet />
+        <section>
+          <Outlet />
+        </section>
+        <footer>
+          <PageFooter />
+        </footer>
       </main>
-      <footer>
-        <PageFooter />
-      </footer>
     </Stack>
   );
 };
@@ -33,18 +36,22 @@ const AdminLayout = () => {
   return (
     <Stack direction={"column"} className={styles.main}>
       <header className={"flex-0"}>Admin Header</header>
-      <main className={"flex-1"}>
-        <Outlet />
-      </main>
-      <footer>
-        <PageFooter />
-      </footer>
+      <div className={"flex-1"}>
+        <main>
+          <Outlet />
+        </main>
+        <footer>
+          <PageFooter />
+        </footer>
+      </div>
     </Stack>
   );
 };
 
 const AppRoutes = (): ReactElement => {
   const client = useLDClient();
+  const { showSnackbar } = useSnackbar();
+
   const [enableChat, setEnableChat] = useState(false);
 
   useEffect(() => {
@@ -53,15 +60,15 @@ const AppRoutes = (): ReactElement => {
         const userGroupsContext: LDContext = {
           kind: "user",
           key: "app-user-testing-0001",
-          group: ["test"]
+          group: ["test"],
         };
         await client.identify(userGroupsContext);
         const enableChatAccess = await client.variation("enable-chat-access", false);
         setEnableChat(enableChatAccess);
       }
-    }
-    evaluating().catch(e => console.error(e));
-  }, []);
+    };
+    evaluating().catch((e) => showSnackbar({ message: e.message, severity: "error" }));
+  }, [client]);
 
   return (
     <BrowserRouter>

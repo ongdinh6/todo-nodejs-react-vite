@@ -58,7 +58,7 @@ class FeatureToggleService {
     // Clean up the out-date toggles from the database based on defined map and env files
     for (const featureToggle of togglesInDB) {
       const name = featureToggle.getDataValue("name");
-      if (!toggleInEnv.hasOwnProperty(name) && !mapKeys.includes(name)) {
+      if (!Object.hasOwn(toggleInEnv, name) && !mapKeys.includes(name)) {
         await featureToggle.destroy();
         console.log(`Toggle named [${featureToggle.getDataValue("name")}] has been deleted`);
       }
@@ -70,13 +70,15 @@ class FeatureToggleService {
     const dbKeys = togglesInDB.map((featureToggle) => featureToggle.getDataValue("name"));
 
     const togglesInEnv = this.fromEnv();
-    console.log("togglesInEnv: ", togglesInEnv);
 
     // Load all the toggle based on the defined map and env
     const toggleResponses: FeatureToggleResponse[] = [];
     this.FEATURE_TOGGLES.forEach((toggle) => {
-      if (dbKeys.includes(toggle.name) && togglesInEnv.hasOwnProperty(toggle.name)) {
-        toggle.value = togglesInDB.find((featureToggle) => featureToggle.getDataValue("name") === toggle.name)?.getDataValue("value") ?? ""
+      if (dbKeys.includes(toggle.name) && Object.hasOwn(togglesInEnv, toggle.name)) {
+        toggle.value =
+          togglesInDB
+            .find((featureToggle) => featureToggle.getDataValue("name") === toggle.name)
+            ?.getDataValue("value") ?? "";
         toggleResponses.push(toggle);
       }
     });

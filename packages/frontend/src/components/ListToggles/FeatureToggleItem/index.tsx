@@ -1,9 +1,10 @@
-import React, { ChangeEvent, ReactElement } from "react";
+import React, { ChangeEvent, ReactElement, useState } from "react";
 import { Stack } from "@mui/material";
 
 import { FeatureToggle } from "apis/toggle/type.ts";
 import SwitchBtn from "components/shared/SwitchBtn";
 import FeatureToggleAPI from "apis/toggle/client.ts";
+import { useSnackbar } from "stores/contexts.tsx";
 
 type FeatureToggleItemProps = {
   featureToggle: FeatureToggle;
@@ -12,16 +13,24 @@ type FeatureToggleItemProps = {
 const featureToggleClient = new FeatureToggleAPI();
 
 const FeatureToggleItem = ({ featureToggle }: FeatureToggleItemProps): ReactElement => {
+  const { showSnackbar } = useSnackbar();
+  const [isChecked, setIsChecked] = useState(featureToggle.value === "true");
+
   const handleUpdate = async (e: ChangeEvent<HTMLInputElement>) => {
-    const updated = await featureToggleClient.update(featureToggle.name, String(e.target.checked));
-    console.log("Updated successfully: ", updated);
+    try {
+      const toggle = await featureToggleClient.update(featureToggle.name, String(e.target.checked));
+      showSnackbar({ message: `Updated ${toggle.name} successfully!`, severity: "success" });
+      setIsChecked(toggle.value === "true");
+    } catch (e) {
+      showSnackbar({ message: e, severity: "error" });
+    }
   };
 
   return (
     <Stack direction={"row"}>
       <span>{featureToggle.name}</span>
       <span>
-        <SwitchBtn checked={featureToggle.value === "true"} onChange={handleUpdate} />
+        <SwitchBtn checked={isChecked} onChange={handleUpdate} />
       </span>
       <span>{featureToggle.description}</span>
     </Stack>

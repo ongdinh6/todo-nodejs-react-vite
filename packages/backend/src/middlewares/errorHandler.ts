@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 
 const routersURI: string[] = ["/bye"];
 
-export const errorHandler = (error: Error, req: Request, res: Response, next: NextFunction) => {
+export const errorHandler = (error: Error, req: Request, res: Response) => {
   if (!routersURI.includes(req.url) || !req.url.startsWith("/api")) {
     return res.status(404).json(new Error("Page Not Found!"));
   }

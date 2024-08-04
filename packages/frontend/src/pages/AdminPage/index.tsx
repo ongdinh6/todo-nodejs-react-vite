@@ -2,22 +2,14 @@ import React, { ReactElement, useEffect, useState } from "react";
 
 import ListToggles from "components/ListToggles";
 import { FeatureToggle } from "apis/toggle/type.ts";
-import { useLDClient } from "launchdarkly-react-client-sdk";
 import FeatureToggleAPI from "apis/toggle/client.ts";
+import { useSnackbar } from "stores/contexts.tsx";
 
 const featureToggleClient = new FeatureToggleAPI();
 
 const AdminPage = (): ReactElement => {
   const [featureToggles, setFeatureToggles] = useState<FeatureToggle[]>([]);
-  // const ldClient = useLDClient();
-  //
-  // useEffect(() => {
-  //   if (ldClient) {
-  //     const allFlags = ldClient.allFlags();
-  //     const toggles = Object.entries(allFlags).map(([key, value]) => ({ key, value }));
-  //     setFeatureToggles(toggles);
-  //   }
-  // }, []);
+  const { showSnackbar } = useSnackbar();
 
   useEffect(() => {
     let ignore = false;
@@ -27,11 +19,11 @@ const AdminPage = (): ReactElement => {
         setFeatureToggles(toggles);
       }
     };
-    loadAllToggles().catch((error) => console.error("Failed while load all feature toggles. ", error));
+    loadAllToggles().catch((error) => showSnackbar({ message: error.message, severity: "error" }));
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [showSnackbar]);
 
   return (
     <>
