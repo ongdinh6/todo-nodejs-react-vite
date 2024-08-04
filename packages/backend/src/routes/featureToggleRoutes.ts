@@ -1,9 +1,11 @@
 import { Router } from "express";
 
 import FeatureToggleService from "services/featureToggleService";
-import ldClient from "launchdarkly/ldClient";
+import LdClient from "launchdarkly/ldClient";
 
 const router = Router();
+
+const ldClient = LdClient.getInstance();
 
 router.get("/", async (_req, res) => {
   const allToggles = await FeatureToggleService.allToggles();

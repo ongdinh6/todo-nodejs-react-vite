@@ -3,21 +3,30 @@ import * as dotenv from "dotenv";
 import * as path from "path";
 import * as fs from "fs";
 
-export class EnvConfig {
-  static readonly DB_CONNECTION_STRING = "DB_CONNECTION_STRING";
-  static readonly DB_NAME = "DB_NAME";
-  static readonly DB_USERNAME = "DB_USERNAME";
-  static readonly DB_PASS = "DB_PASS";
-  static readonly DB_SERVER = "DB_SERVER";
-  static readonly DB_PORT = "DB_PORT";
-  static readonly DB_SCHEMA = "DB_SCHEMA";
-  static readonly SERVER_PORT = "SERVER_PORT";
-  static readonly LD_SERVER_SDK = "LD_SERVER_SDK";
-  static readonly LD_PROJECT_KEY = "LD_PROJECT_KEY";
-  static readonly LD_AUTHORIZATION = "LD_AUTHORIZATION";
-  static readonly LD_ENVIRONMENT_KEY = "LD_ENVIRONMENT_KEY";
+type EnvTypes =
+  // Server
+  | "SERVER_PORT"
+  | "NODE_ENV"
 
-  constructor() {
+  // Database
+  | "DB_CONNECTION_STRING"
+  | "DB_NAME"
+  | "DB_PASS"
+  | "DB_USERNAME"
+  | "DB_SERVER"
+  | "DB_PORT"
+  | "DB_SCHEMA"
+
+  // LaunchDarkly
+  | "LD_SERVER_SDK"
+  | "LD_PROJECT_KEY"
+  | "LD_AUTHORIZATION"
+  | "LD_ENVIRONMENT_KEY"
+
+export class EnvConfig {
+  private static INSTANCE: EnvConfig | null = null;
+
+  private constructor() {
     const defaultEnvPath = path.resolve(__dirname, "../../.env");
 
     // Determine the environment
@@ -29,8 +38,19 @@ export class EnvConfig {
     EnvConfig.loadEnvFiles([defaultEnvPath, envSpecificPath]);
   }
 
-  get(key: string, defaultValue?: string) {
+  static getInstance(): EnvConfig {
+    if (!this.INSTANCE) {
+      this.INSTANCE = new EnvConfig();
+    }
+    return this.INSTANCE;
+  }
+
+  get(key: EnvTypes, defaultValue?: string) {
     return process.env[key] ?? defaultValue ?? "";
+  }
+
+  getBoolFeatureToggle(key: string) {
+    return process.env[key] === "true";
   }
 
   static loadEnvFiles(filePaths: string[]) {
@@ -48,6 +68,4 @@ export class EnvConfig {
   }
 }
 
-const envConfig = new EnvConfig();
-
-export default envConfig;
+export default EnvConfig;

@@ -1,35 +1,47 @@
 import * as LaunchDarkly from "@launchdarkly/node-server-sdk";
 
-import envConfig, { EnvConfig } from "utils/envConfig";
+import EnvConfig from "utils/envConfig";
 import { FEATURE_FLAG_KEY } from "launchdarkly/featureFlag";
 
 class LdClient {
+  private readonly TIMEOUT_IN_SECONDS = 10; // recommended 1-60 seconds
+  private readonly envConfig = EnvConfig.getInstance();
+  private static INSTANCE: LdClient | null = null;
   private ldClient: LaunchDarkly.LDClient | null = null;
+
+  private constructor() {}
+
+  static getInstance(): LdClient {
+    if (!this.INSTANCE) {
+      this.INSTANCE = new LdClient();
+    }
+    return this.INSTANCE;
+  }
 
   /**
    * The LDClient must be singleton
    * Read more:
    **/
   private getClient = async (): Promise<LaunchDarkly.LDClient> => {
-    const sdkKey = envConfig.get(EnvConfig.LD_SERVER_SDK);
+    const sdkKey = this.envConfig.get("LD_SERVER_SDK");
     const client = LaunchDarkly.init(sdkKey);
     await client.waitForInitialization({
-      timeout: 5000,
+      timeout: this.TIMEOUT_IN_SECONDS,
     });
     return client;
   };
 
   evaluate = async (featureFlagKey: string, value: string) => {
-    const projectKey = envConfig.get(EnvConfig.LD_PROJECT_KEY);
+    const projectKey = this.envConfig.get("LD_PROJECT_KEY");
     try {
       const resp = await fetch(`https://app.launchdarkly.com/api/v2/flags/${projectKey}/${featureFlagKey}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json; domain-model=launchdarkly.semanticpatch",
-          Authorization: envConfig.get(EnvConfig.LD_AUTHORIZATION),
+          Authorization: this.envConfig.get("LD_AUTHORIZATION"),
         },
         body: JSON.stringify({
-          environmentKey: envConfig.get(EnvConfig.LD_ENVIRONMENT_KEY),
+          environmentKey: this.envConfig.get("LD_ENVIRONMENT_KEY"),
           instructions: [{ kind: value === "true" ? "turnFlagOn" : "turnFlagOff" }],
         }),
       });
@@ -49,8 +61,6 @@ class LdClient {
     }
   };
 
-  allFlags = () => {};
-
   getFlagValue = async (
     key: FEATURE_FLAG_KEY,
     user?: LaunchDarkly.LDContext,
@@ -69,5 +79,4 @@ class LdClient {
   };
 }
 
-const ldClient = new LdClient();
-export default ldClient;
+export default LdClient;

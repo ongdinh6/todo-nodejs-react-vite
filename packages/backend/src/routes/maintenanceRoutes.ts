@@ -1,8 +1,10 @@
 import { Router } from "express";
-import ldClient from "launchdarkly/ldClient";
 import { FEATURE_FLAG_KEY } from "launchdarkly/featureFlag";
+import LdClient from "launchdarkly/ldClient";
 
 const router = Router();
+
+const ldClient = LdClient.getInstance();
 
 // Subscribe to changes in the feature flag
 router.get("", async (_req, res) => {

@@ -1,14 +1,16 @@
 import { Sequelize } from "sequelize";
 
-import envConfig, { EnvConfig } from "utils/envConfig";
+import EnvConfig from "utils/envConfig";
+
+const envConfig = EnvConfig.getInstance();
 
 const sequelize = new Sequelize({
   dialect: "mssql",
-  database: envConfig.get(EnvConfig.DB_NAME),
-  username: envConfig.get(EnvConfig.DB_USERNAME),
-  password: envConfig.get(EnvConfig.DB_PASS),
-  host: envConfig.get(EnvConfig.DB_SERVER),
-  port: Number(envConfig.get(EnvConfig.DB_PORT, "1433")),
+  database: envConfig.get("DB_NAME"),
+  username: envConfig.get("DB_USERNAME"),
+  password: envConfig.get("DB_PASS"),
+  host: envConfig.get("DB_SERVER"),
+  port: Number(envConfig.get("DB_PORT", "1433")),
   dialectOptions: {
     options: {
       encrypt: false, // If you're using Azure, otherwise false

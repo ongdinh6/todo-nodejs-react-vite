@@ -10,7 +10,6 @@
     "rootDir": "src",
     "declaration": false,
     "strict": true,
-    "lib": ["es2022"],
     "types": [
       "jest",
       "@types/node"
@@ -19,6 +18,9 @@
       "*": ["src/*"]
     }
   },
-  "include": ["src", "src/types"],
+  "include": [
+    "src",
+    "src/types"
+  ],
   "exclude": ["__test__"]
 }

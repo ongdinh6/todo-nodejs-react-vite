@@ -3,11 +3,12 @@ import process from "process";
 import FeatureToggle from "database/models/featureToggle";
 import FeatureToggleRepository from "repositories/featureToggleRepository";
 import { FeatureToggleResponse } from "models/responses/featureToggleResponse";
-import envConfig from "utils/envConfig";
+import EnvConfig from "utils/envConfig";
 
 type Toggle = FeatureToggleResponse;
 
 class FeatureToggleService {
+  private static readonly envConfig = EnvConfig.getInstance();
   // FeatureToggles
   private static readonly FEATURE_TOGGLES: Toggle[] = [
     {
@@ -34,7 +35,7 @@ class FeatureToggleService {
     for (const k in process.env) {
       if (k.startsWith(PREFIX)) {
         const key = k.substring(PREFIX.length);
-        featureToggle[key] = envConfig.get(k);
+        featureToggle[key] = this.envConfig.getBoolFeatureToggle(k).toString();
       }
     }
     return featureToggle;
@@ -58,7 +59,7 @@ class FeatureToggleService {
     // Clean up the out-date toggles from the database based on defined map and env files
     for (const featureToggle of togglesInDB) {
       const name = featureToggle.getDataValue("name");
-      if (!Object.hasOwn(toggleInEnv, name) && !mapKeys.includes(name)) {
+      if (!toggleInEnv[name] && !mapKeys.includes(name)) {
         await featureToggle.destroy();
         console.log(`Toggle named [${featureToggle.getDataValue("name")}] has been deleted`);
       }
@@ -74,7 +75,7 @@ class FeatureToggleService {
     // Load all the toggle based on the defined map and env
     const toggleResponses: FeatureToggleResponse[] = [];
     this.FEATURE_TOGGLES.forEach((toggle) => {
-      if (dbKeys.includes(toggle.name) && Object.hasOwn(togglesInEnv, toggle.name)) {
+      if (dbKeys.includes(toggle.name) && togglesInEnv[toggle.name]) {
         toggle.value =
           togglesInDB
             .find((featureToggle) => featureToggle.getDataValue("name") === toggle.name)
