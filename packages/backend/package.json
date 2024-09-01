@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "private": true,
     "main": "../../dist/packages/backend/src/index.js",
-    "type": "commonjs",
+    "type": "module",
     "scripts": {
         "dev": "nodemon",
         "test": "jest --setupFiles ./jest.config.js --detectOpenHandles",
@@ -12,9 +12,10 @@
         "start": "cross-env NODE_ENV=production node ../../dist/packages/backend/src/index.js"
     },
     "_moduleAliases": {
-        "app": "../../dist/packages/backend/src/app",
-        "controllers": "../../dist/packages/backend/src/controllers",
+        "annotations": "../../dist/packages/backend/src/annotations",
         "database": "../../dist/packages/backend/src/database",
+        "errors": "../../dist/packages/backend/src/errors",
+        "launchdarkly": "../../dist/packages/backend/src/launchdarkly",
         "middlewares": "../../dist/packages/backend/src/middlewares",
         "models": "../../dist/packages/backend/src/models",
         "repositories": "../../dist/packages/backend/src/repositories",
@@ -24,10 +25,11 @@
     },
     "dependencies": {
         "@launchdarkly/node-server-sdk": "^9.4.7",
+        "body-parser": "^1.20.2",
         "cors": "^2.8.5",
         "express": "^4.19.2",
         "module-alias": "^2.2.3",
-        "mssql": "^10.0.2",
+        "mssql": "^11.0.1",
         "node-schedule": "^2.1.1",
         "sequelize": "^6.37.3",
         "tedious": "^18.2.0"

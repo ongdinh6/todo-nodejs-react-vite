@@ -4,7 +4,7 @@ import { Stack } from "@mui/material";
 import { FeatureToggle } from "apis/toggle/type.ts";
 import SwitchBtn from "components/shared/SwitchBtn";
 import FeatureToggleAPI from "apis/toggle/client.ts";
-import { useSnackbar } from "stores/contexts.tsx";
+import { useSnackbar } from "contexts/contexts.tsx";
 
 type FeatureToggleItemProps = {
   featureToggle: FeatureToggle;

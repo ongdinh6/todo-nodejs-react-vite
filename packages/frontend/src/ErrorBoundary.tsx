@@ -22,7 +22,9 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   componentDidCatch(error: Error, info: ErrorInfo) {
     // Log the error to an error reporting service
-    logErrorToMyService(error, info.componentStack);
+    window.onerror = (event: Event | string, source?: string, lineno?: number, colno?: number, error?: Error) => {
+      logErrorToMyService(error ?? new Error("e"), info.componentStack);
+    };
   }
 
   render() {

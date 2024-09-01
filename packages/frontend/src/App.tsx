@@ -12,7 +12,7 @@ import PageNotFound from "pages/ErrorPage/PageNotFound";
 import ProductList from "pages/ProductList";
 
 import styles from "./Index.module.css";
-import { useSnackbar } from "stores/contexts.tsx";
+import { useSnackbar } from "contexts/contexts.tsx";
 
 const App = () => {
   return (
@@ -74,7 +74,7 @@ const AppRoutes = (): ReactElement => {
     <BrowserRouter>
       <Routes>
         <Route path={"/"} element={<App />}>
-          <Route index element={<HomePage />} />
+          <Route index path={"home"} element={<HomePage />} />
           <Route path={"list-products"} element={<ProductList />} />
           {enableChat && <Route path={"chat-bot"} element={<ChatBotPage />} />}
         </Route>

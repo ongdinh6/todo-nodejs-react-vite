@@ -8,8 +8,10 @@ import { EnvConfig } from "envConfig.ts";
 
 import "./App.css";
 import ErrorBoundary from "ErrorBoundary.tsx";
-import { SnackbarProvider } from "stores/contexts.tsx";
+import { SnackbarProvider } from "contexts/contexts.tsx";
 import InternalServerErrorPage from "pages/InternalServerErrorPage";
+import { Provider } from "react-redux";
+import { store } from "store/store.ts";
 
 const App = () => {
   return (
@@ -28,8 +30,11 @@ const LDProvider = withLDProvider({
   timeout: TIMEOUT_IN_SECONDS,
 })(App);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const root = document.getElementById("root") as HTMLElement;
+ReactDOM.createRoot(root).render(
   <StyledEngineProvider injectFirst>
-    <LDProvider />
+    <Provider store={store}>
+      <LDProvider />
+    </Provider>
   </StyledEngineProvider>,
 );

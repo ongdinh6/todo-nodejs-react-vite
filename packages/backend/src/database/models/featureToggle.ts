@@ -12,11 +12,12 @@ FeatureToggle.init(
       primaryKey: true,
     },
     value: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
     },
   },
   {
     sequelize,
+    tableName: "feature_toggle",
     modelName: "FeatureToggle",
     timestamps: false,
   },

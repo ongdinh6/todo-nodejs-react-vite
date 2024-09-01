@@ -2,6 +2,8 @@
   "name": "todo-nodejs-react-vite",
   "version": "1.0.0",
   "description": "",
+  "type": "commonjs",
+  "module": "CommonJS",
   "private": true,
   "main": "dist/packages/backend/src/index.js",
   "scripts": {
@@ -27,9 +29,9 @@
     "packages/*"
   ],
   "_moduleAliases": {
-    "app": "dist/packages/backend/src/app",
-    "controllers": "dist/packages/backend/src/controllers",
+    "annotations": "dist/packages/backend/src/annotations",
     "database": "dist/packages/backend/src/database",
+    "errors": "dist/packages/backend/src/errors",
     "launchdarkly": "dist/packages/backend/src/launchdarkly",
     "middlewares": "dist/packages/backend/src/middlewares",
     "models": "dist/packages/backend/src/models",
@@ -60,8 +62,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@mui/material": "^5.15.19",
-    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
     "postcss-modules": "^6.0.0",
     "styled-components": "^6.1.11",

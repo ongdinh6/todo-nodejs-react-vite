@@ -21,7 +21,7 @@ type EnvTypes =
   | "LD_SERVER_SDK"
   | "LD_PROJECT_KEY"
   | "LD_AUTHORIZATION"
-  | "LD_ENVIRONMENT_KEY"
+  | "LD_ENVIRONMENT_KEY";
 
 export class EnvConfig {
   private static INSTANCE: EnvConfig | null = null;

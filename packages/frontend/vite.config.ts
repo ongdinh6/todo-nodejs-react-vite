@@ -14,9 +14,9 @@ export default defineConfig(function () {
       preprocessorOptions: {
         postcss: {
           plugins: [
-            // Make sure to add the path to your postcss.config.js file
+            // Make sure to add the path to your postcss.config.cjs file
             autoprefixer(),
-            tailwindcss("./tailwind.config.js"),
+            tailwindcss("./tailwind.config.cjs"),
           ],
         },
       },

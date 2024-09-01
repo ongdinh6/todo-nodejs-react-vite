@@ -22,6 +22,7 @@ const sequelize = new Sequelize({
     // Because the Sequelize automatically pluralizes the model name and uses that as the table name
     // Using this config to stop the auto-pluralization
     freezeTableName: true,
+    schema: "todo",
   },
 });
 

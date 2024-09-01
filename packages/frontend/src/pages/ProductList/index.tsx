@@ -1,57 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Grid } from "@mui/material";
 
-import { Product } from "apis/product/type.ts";
 import CommentCard from "components/shared/CommentCard";
 import SearchInput from "components/shared/SearchInput";
-import CreateNewProductModal from "components/modal/CreateNewProductModal";
-import { PRODUCT_MODALS } from "commonType/modals";
-import { randomKey } from "utils/strings.ts";
+import ProductDialog from "components/ProductDialog";
 
 import styles from "./styles.module.css";
-
-const products: Product[] = [
-  {
-    name: "IPhone 14",
-    date: "Jun 30 2024",
-    comment: "Discount to 50%",
-  },
-  {
-    name: "Samsung Ultra",
-    date: "Jul 17 2024",
-    comment: "Discount to 70%",
-  },
-  {
-    name: "Redmi Note",
-    date: "Jul 20 2024",
-    comment: "Get free",
-  },
-  {
-    name: "IPhone 14",
-    date: "Jun 30 2024",
-    comment: "Discount to 50%",
-  },
-  {
-    name: "Samsung Ultra",
-    date: "Jul 17 2024",
-    comment: "Discount to 70%",
-  },
-  {
-    name: "Redmi Note",
-    date: "Jul 20 2024",
-    comment: "Get free",
-  },
-];
+import { useGetProductsQuery } from "apis/product/client.ts";
+import Spinner from "components/shared/Spinner";
+import { useAppDispatch, useAppSelector } from "store/hooks.ts";
+import { initProducts } from "store/product/slice.ts";
 
 const ProductList = () => {
+  const dispatch = useAppDispatch();
+  const products = useAppSelector(state => state.products.data);
+  const { data: paginatedResult, isFetching, error } = useGetProductsQuery(undefined);
   const [modal, setModal] = useState<string | null>(null);
+
+  useEffect(() => {
+    dispatch(initProducts(paginatedResult?.data ?? []));
+  }, [dispatch, paginatedResult]);
+
+  if (isFetching) {
+    return <Spinner />;
+  }
 
   const handleOpenModal = (modal: string) => {
     setModal(modal);
-  };
-
-  const handleCloseModal = () => {
-    setModal(null);
   };
 
   return (
@@ -61,23 +36,25 @@ const ProductList = () => {
         <Button
           variant={"contained"}
           className={"normal-case rounded-full"}
-          onClick={() => handleOpenModal(PRODUCT_MODALS.CREATE_NEW_PRODUCT)}
+          onClick={() => handleOpenModal("create")}
         >
           Add new product
         </Button>
       </Grid>
 
-      {products.map((product) => (
+      {products.map((product: any) => (
         <CommentCard
-          key={randomKey()}
+          key={product.id}
           name={product.name}
-          date={product.date}
-          comment={product.comment}
+          date={product.createdAt}
+          comment={product.description}
           avatarUrl="https://example.com/avatar.jpg"
         />
       ))}
 
-      {modal === PRODUCT_MODALS.CREATE_NEW_PRODUCT && <CreateNewProductModal open={true} onClose={handleCloseModal} />}
+      {
+        modal === "create" && <ProductDialog open={true} />
+      }
     </Box>
   );
 };

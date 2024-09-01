@@ -3,7 +3,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 import ListToggles from "components/ListToggles";
 import { FeatureToggle } from "apis/toggle/type.ts";
 import FeatureToggleAPI from "apis/toggle/client.ts";
-import { useSnackbar } from "stores/contexts.tsx";
+import { useSnackbar } from "contexts/contexts.tsx";
 
 const featureToggleClient = new FeatureToggleAPI();
 
