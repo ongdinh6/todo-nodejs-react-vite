@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
-import ProductForm from 'components/ProductForm';
+import React, { useState } from "react";
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
+import ProductForm from "components/ProductForm";
 
 interface ProductDialogProps {
-  open: boolean
+  open: boolean;
 }
 
 const ProductDialog: React.FC<ProductDialogProps> = ({ open }) => {

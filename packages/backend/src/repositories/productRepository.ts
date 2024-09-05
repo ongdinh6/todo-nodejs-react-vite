@@ -8,12 +8,12 @@ export class ProductRepository {
     console.log("getProducts: searchParams: ", searchParams);
     if (searchParams) {
       return await ProductModel.findAll({
-        offset: ((searchParams.page ?? DEFAULT_PAGE) * DEFAULT_ITEM_PER_PAGE) - DEFAULT_ITEM_PER_PAGE,
+        offset: (searchParams.page ?? DEFAULT_PAGE) * DEFAULT_ITEM_PER_PAGE - DEFAULT_ITEM_PER_PAGE,
         limit: DEFAULT_ITEM_PER_PAGE,
       });
     }
     return await ProductModel.findAll();
-  }
+  };
 
   static readonly createOrUpdate = async (model: ProductModel) => {
     const [instance, created] = await ProductModel.upsert(model);
@@ -23,7 +23,7 @@ export class ProductRepository {
       console.log(`Updated the product with id [${model.id}]`);
     }
     return instance;
-  }
+  };
 
   static readonly getOneById = async (id: string): Promise<ProductModel | null> => {
     return await ProductModel.findOne({
@@ -31,5 +31,5 @@ export class ProductRepository {
         id,
       },
     });
-  }
+  };
 }

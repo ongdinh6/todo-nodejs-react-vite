@@ -22,7 +22,7 @@ const FeatureToggleItem = ({ featureToggle }: FeatureToggleItemProps): ReactElem
       showSnackbar({ message: `Updated ${toggle.name} successfully!`, severity: "success" });
       setIsChecked(toggle.value === "true");
     } catch (e) {
-      showSnackbar({ message: e, severity: "error" });
+      showSnackbar({ message: `${e}`, severity: "error" });
     }
   };
 

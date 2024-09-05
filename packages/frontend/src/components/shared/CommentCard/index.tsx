@@ -5,8 +5,11 @@ import classNames from "classnames";
 
 import DeleteBtn from "components/shared/DeleteBtn";
 import EditBtn from "components/shared/EditBtn";
+import { useDeleteProductMutation } from "apis/product/client.ts";
+import { useSnackbar } from "contexts/contexts.tsx";
 
 interface CommentCardProps {
+  id: string;
   name: string;
   date: string;
   comment: string;
@@ -25,8 +28,20 @@ const StyledAvatar = styled(Avatar)({
   marginRight: "16px",
 });
 
-const CommentCard: React.FC<CommentCardProps> = ({ name, date, comment, avatarUrl, className }) => {
-  const handleDelete = () => {};
+const CommentCard: React.FC<CommentCardProps> = ({ id, name, date, comment, avatarUrl, className }) => {
+  const [deleteMutation] = useDeleteProductMutation();
+  const { showSnackbar } = useSnackbar();
+
+  const handleDelete = async () => {
+    try {
+      const result = await deleteMutation(id).unwrap();
+      console.log("result: ", result);
+      showSnackbar({ severity: "success", message: `<p>The product <b>${name}</b> has been successfully!</p>` });
+    } catch (e) {
+      console.error("Error: ", e);
+      showSnackbar({ severity: "error", message: e instanceof Error ? e.message : "Failed to delete" })
+    }
+  };
 
   return (
     <StyledCard className={classNames(className, "space-x-2 flex")}>

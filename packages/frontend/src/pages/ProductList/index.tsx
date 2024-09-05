@@ -8,18 +8,10 @@ import ProductDialog from "components/ProductDialog";
 import styles from "./styles.module.css";
 import { useGetProductsQuery } from "apis/product/client.ts";
 import Spinner from "components/shared/Spinner";
-import { useAppDispatch, useAppSelector } from "store/hooks.ts";
-import { initProducts } from "store/product/slice.ts";
 
 const ProductList = () => {
-  const dispatch = useAppDispatch();
-  const products = useAppSelector(state => state.products.data);
   const { data: paginatedResult, isFetching, error } = useGetProductsQuery(undefined);
   const [modal, setModal] = useState<string | null>(null);
-
-  useEffect(() => {
-    dispatch(initProducts(paginatedResult?.data ?? []));
-  }, [dispatch, paginatedResult]);
 
   if (isFetching) {
     return <Spinner />;
@@ -33,18 +25,15 @@ const ProductList = () => {
     <Box className={styles.productListWrapper}>
       <Grid>
         <SearchInput placeholder="Search book..." />
-        <Button
-          variant={"contained"}
-          className={"normal-case rounded-full"}
-          onClick={() => handleOpenModal("create")}
-        >
+        <Button variant={"contained"} className={"normal-case rounded-full"} onClick={() => handleOpenModal("create")}>
           Add new product
         </Button>
       </Grid>
 
-      {products.map((product: any) => (
+      {paginatedResult?.data.map((product: any) => (
         <CommentCard
           key={product.id}
+          id={product.id}
           name={product.name}
           date={product.createdAt}
           comment={product.description}
@@ -52,9 +41,7 @@ const ProductList = () => {
         />
       ))}
 
-      {
-        modal === "create" && <ProductDialog open={true} />
-      }
+      {modal === "create" && <ProductDialog open={true} />}
     </Box>
   );
 };

@@ -3,7 +3,7 @@ import sequelize from "database/sequelizeConfig";
 import { Product } from "models/productTypes";
 import { ProductRequest } from "models/requests/productRequest";
 
-export class ProductModel extends Model<InferAttributes<ProductModel>,InferCreationAttributes<ProductModel>> {
+export class ProductModel extends Model<InferAttributes<ProductModel>, InferCreationAttributes<ProductModel>> {
   declare id: CreationOptional<string>;
   declare name: string;
   declare price: number;
@@ -19,8 +19,8 @@ export class ProductModel extends Model<InferAttributes<ProductModel>,InferCreat
       price: this.price,
       createdAt: this.createdAt?.toISOString(),
       updatedAt: this.updatedAt?.toISOString(),
-    }
-  }
+    };
+  };
 
   updatedForm = (req: ProductRequest): ProductModel => {
     return ProductModel.build({
@@ -30,34 +30,37 @@ export class ProductModel extends Model<InferAttributes<ProductModel>,InferCreat
       price: req.price ?? this.price,
       createdAt: this.createdAt,
     });
-  }
+  };
 }
 
-ProductModel.init({
-  id: {
-    primaryKey: true,
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    allowNull: false,
+ProductModel.init(
+  {
+    id: {
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+    },
+    name: {
+      type: DataTypes.STRING,
+    },
+    description: {
+      type: DataTypes.TEXT,
+    },
+    price: {
+      type: DataTypes.BIGINT,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+    },
   },
-  name: {
-    type: DataTypes.STRING,
+  {
+    sequelize,
+    tableName: "product",
+    modelName: "Product",
   },
-  description: {
-    type: DataTypes.TEXT,
-  },
-  price: {
-    type: DataTypes.BIGINT,
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-  }
-}, {
-  sequelize,
-  tableName: "product",
-  modelName: "Product",
-});
+);

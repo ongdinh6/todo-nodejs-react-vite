@@ -7,11 +7,17 @@ import { ProductRequest } from "models/requests/productRequest";
 
 const router = Router();
 
-router.get("", async (req: Request<null, PaginatedResult<Product>, null, SearchRequestParameter | null | undefined>, res: Response) => {
-  const params = req.query;
-  const result = await ProductService.getProducts(params);
-  res.json(result);
-});
+router.get(
+  "",
+  async (
+    req: Request<null, PaginatedResult<Product>, null, SearchRequestParameter | null | undefined>,
+    res: Response,
+  ) => {
+    const params = req.query;
+    const result = await ProductService.getProducts(params);
+    res.json(result);
+  },
+);
 
 router.post("/new", async (req: Request<null, Product, ProductRequest, null>, res: Response, next: NextFunction) => {
   try {
@@ -23,15 +29,28 @@ router.post("/new", async (req: Request<null, Product, ProductRequest, null>, re
   }
 });
 
-router.put("/edit/:id", async (req: Request<{ id: string }, Product, ProductRequest, null>, res: Response, next: NextFunction) => {
+router.put(
+  "/edit/:id",
+  async (req: Request<{ id: string }, Product, ProductRequest, null>, res: Response, next: NextFunction) => {
+    try {
+      const payload = req.body;
+      const { id } = req.params;
+      const result = await ProductService.updateProduct(id, payload);
+      res.json(result);
+    } catch (e) {
+      next(e);
+    }
+  },
+);
+
+router.delete("/delete/:id", async (req: Request<{ id: string }, { message: string }, null, null>, res: Response, next: NextFunction) => {
   try {
-    const payload = req.body;
     const { id } = req.params;
-    const result = await ProductService.updateProduct(id, payload);
-    res.json(result);
+    const result = await ProductService.deleteProduct(id);
+    res.json({ message: result });
   } catch (e) {
     next(e);
   }
-});
+})
 
 export default router;

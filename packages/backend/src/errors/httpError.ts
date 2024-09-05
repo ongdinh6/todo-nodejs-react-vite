@@ -25,5 +25,5 @@ export class HttpError extends Error {
       timestamp: this.timestamp,
       path: this.path,
     };
-  }
+  };
 }

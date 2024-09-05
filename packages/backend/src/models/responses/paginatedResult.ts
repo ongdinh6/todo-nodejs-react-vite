@@ -13,6 +13,6 @@ export class PaginatedResult<T> {
     this.currentPage = currentPage;
     this.itemsPerPage = itemsPerPage;
     const page = Math.floor(data.length / itemsPerPage);
-    this.totalPage = page > DEFAULT_PAGE ? (data.length%itemsPerPage === 0 ? page : page + 1) : DEFAULT_PAGE;
+    this.totalPage = page > DEFAULT_PAGE ? (data.length % itemsPerPage === 0 ? page : page + 1) : DEFAULT_PAGE;
   }
 }

@@ -6,7 +6,7 @@ export const PRODUCT_SLICE_REDUCER_NAME = "products";
 
 const initialState: ProductState = {
   data: [],
-}
+};
 
 export const productSlice = createSlice({
   name: PRODUCT_SLICE_REDUCER_NAME,

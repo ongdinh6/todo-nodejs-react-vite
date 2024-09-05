@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 import { SnackbarCloseReason } from "@mui/material/Snackbar/Snackbar";
 
 interface SnackbarProps {
-  message: string | unknown;
+  message: string;
   severity: "success" | "error" | "info" | "warning";
   id?: string;
 }
@@ -35,7 +35,7 @@ const SnackbarItem = ({ props, index, onClose }: SnackbarItemProps) => {
 
   return (
     <Snackbar
-      autoHideDuration={3000}
+      autoHideDuration={5000}
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       style={{ marginBottom: index * 80 }}
       className={styles.snackbar}
@@ -44,7 +44,7 @@ const SnackbarItem = ({ props, index, onClose }: SnackbarItemProps) => {
       onClose={handleAutoDismissed}
     >
       <Alert onClose={() => onClose(props.id)} severity={props.severity}>
-        <>{props.message}</>
+       <div dangerouslySetInnerHTML={{ __html: props.message  }} />
       </Alert>
     </Snackbar>
   );

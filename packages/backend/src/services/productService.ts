@@ -7,11 +7,13 @@ import { ProductModel } from "database/models/product";
 import { NotFoundError } from "errors/notFoundError";
 
 export class ProductService {
-  static readonly getProducts = async (searchParameter?: SearchRequestParameter | null): Promise<PaginatedResult<Product>> => {
+  static readonly getProducts = async (
+    searchParameter?: SearchRequestParameter | null,
+  ): Promise<PaginatedResult<Product>> => {
     const productModels = await ProductRepository.getProducts(searchParameter);
-    const products = productModels.map(product => product.toResponse());
+    const products = productModels.map((product) => product.toResponse());
     return new PaginatedResult<Product>(products, searchParameter?.page ?? DEFAULT_PAGE);
-  }
+  };
 
   static readonly createNewProduct = async (payload: ProductRequest): Promise<Product> => {
     const productModel = ProductModel.build({
@@ -21,7 +23,7 @@ export class ProductService {
     });
     const savedProduct = await ProductRepository.createOrUpdate(productModel.toJSON());
     return savedProduct.toResponse();
-  }
+  };
 
   static readonly updateProduct = async (id: string, payload: ProductRequest): Promise<Product> => {
     const productModel = await ProductRepository.getOneById(id);
@@ -31,5 +33,19 @@ export class ProductService {
     const updatedModel = productModel.updatedForm(payload);
     const updatedProduct = await ProductRepository.createOrUpdate(updatedModel.toJSON());
     return updatedProduct.toResponse();
+  };
+
+  static readonly deleteProduct = async (id: string): Promise<string> => {
+    const productModel = await ProductRepository.getOneById(id);
+    if (!productModel) {
+      throw new NotFoundError(`The product [${id}] was not found!`);
+    }
+    try {
+      await productModel.destroy();
+      return `The product ${productModel.name} has been deleted successfully!`;
+    } catch (e) {
+      console.error(`Deleting the product ${productModel.name} encountered an error!`, e);
+      return `Deleting the product ${productModel.name} encountered an error!`;
+    }
   }
 }
