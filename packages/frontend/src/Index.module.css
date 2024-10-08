@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 .main {
+  margin: auto;
   display: flex;
   flex-flow: column;
   min-height: 100%;

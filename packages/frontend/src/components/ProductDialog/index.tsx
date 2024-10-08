@@ -1,27 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
 import ProductForm from "components/ProductForm";
 
 interface ProductDialogProps {
   open: boolean;
+  onClose: () => void;
 }
 
-const ProductDialog: React.FC<ProductDialogProps> = ({ open }) => {
-  const [openDialog, setOpenDialog] = useState(open);
-
-  const handleClose = () => {
-    setOpenDialog(false);
-  };
-
+const ProductDialog: React.FC<ProductDialogProps> = ({ open, onClose }) => {
   return (
     <div>
-      <Dialog open={openDialog} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Product Form</DialogTitle>
         <DialogContent>
           <ProductForm />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={onClose} color="primary">
             Close
           </Button>
         </DialogActions>

@@ -1,18 +1,26 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { PaginatedResult, Product, ProductRequest, SearchRequestParameter } from "apis/product/type.ts";
+import {
+  DeleteItemStatus,
+  PaginatedResult,
+  Product,
+  ProductRequest,
+  SearchRequestParameter,
+} from "apis/product/type.ts";
 
 export const PRODUCT_API = "productApi";
 
-const API_URL = "/api/products";
+const API_URL = "https://dummyjson.com/";
+
+
 
 export const productApi = createApi({
   reducerPath: PRODUCT_API,
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   tagTypes: ["PRODUCT"],
   endpoints: (builder) => ({
-    getProducts: builder.query<PaginatedResult<Product>, SearchRequestParameter | undefined>({
+    getProducts: builder.query<any, SearchRequestParameter | undefined>({
       query: (params?) => ({
-        url: "/",
+        url: "products",
         params,
       }),
       providesTags: ["PRODUCT"],
@@ -25,13 +33,13 @@ export const productApi = createApi({
       }),
       invalidatesTags: ["PRODUCT"],
     }),
-    deleteProduct: builder.mutation<{ message: string }, string>({
+    deleteProduct: builder.mutation<DeleteItemStatus, string>({
       query: (id) => ({
         url: `/delete/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["PRODUCT"],
-    })
+    }),
   }),
 });
 

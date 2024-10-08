@@ -1,0 +1,57 @@
+{"level":"error","message":"Error passed as message","service":"your-service-name","stack":"Error: Error passed as message\n    at Object.<anonymous> (D:\\todo-nodejs-react-vite\\packages\\backend\\src\\utils\\logger.js:73:21)\n    at Module._compile (node:internal/modules/cjs/loader:1376:14)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)\n    at Object.require.extensions.<computed> [as .js] (D:\\todo-nodejs-react-vite\\node_modules\\ts-node\\src\\index.ts:1608:43)\n    at Module.load (node:internal/modules/cjs/loader:1207:32)\n    at Function.Module._load (node:internal/modules/cjs/loader:1023:12)\n    at Module.require (node:internal/modules/cjs/loader:1235:19)\n    at require (node:internal/modules/helpers:176:18)\n    at Object.<anonymous> (D:\\todo-nodejs-react-vite\\packages\\backend\\src\\middlewares\\errorHandler.ts:5:1)\n    at Module._compile (node:internal/modules/cjs/loader:1376:14)","timestamp":"2024-09-11 23:17:27"}
+{"level":"error","message":"Important error:  Error passed as meta","service":"your-service-name","stack":"Error: Error passed as meta\n    at Object.<anonymous> (D:\\todo-nodejs-react-vite\\packages\\backend\\src\\utils\\logger.js:75:42)\n    at Module._compile (node:internal/modules/cjs/loader:1376:14)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)\n    at Object.require.extensions.<computed> [as .js] (D:\\todo-nodejs-react-vite\\node_modules\\ts-node\\src\\index.ts:1608:43)\n    at Module.load (node:internal/modules/cjs/loader:1207:32)\n    at Function.Module._load (node:internal/modules/cjs/loader:1023:12)\n    at Module.require (node:internal/modules/cjs/loader:1235:19)\n    at require (node:internal/modules/helpers:176:18)\n    at Object.<anonymous> (D:\\todo-nodejs-react-vite\\packages\\backend\\src\\middlewares\\errorHandler.ts:5:1)\n    at Module._compile (node:internal/modules/cjs/loader:1376:14)","timestamp":"2024-09-11 23:17:27"}
+{"level":"error","message":"Error as info","service":"your-service-name","stack":"Error: Error as info\n    at Object.<anonymous> (D:\\todo-nodejs-react-vite\\packages\\backend\\src\\utils\\logger.js:76:14)\n    at Module._compile (node:internal/modules/cjs/loader:1376:14)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)\n    at Object.require.extensions.<computed> [as .js] (D:\\todo-nodejs-react-vite\\node_modules\\ts-node\\src\\index.ts:1608:43)\n    at Module.load (node:internal/modules/cjs/loader:1207:32)\n    at Function.Module._load (node:internal/modules/cjs/loader:1023:12)\n    at Module.require (node:internal/modules/cjs/loader:1235:19)\n    at require (node:internal/modules/helpers:176:18)\n    at Object.<anonymous> (D:\\todo-nodejs-react-vite\\packages\\backend\\src\\middlewares\\errorHandler.ts:5:1)\n    at Module._compile (node:internal/modules/cjs/loader:1376:14)","timestamp":"2024-09-11 23:17:27"}
+{
+  service: 'your-service-name',
+  toPlainObject: [Function (anonymous)],
+  name: 'Not Found',
+  status: 404,
+  timestamp: '2024-09-11T16:19:50.770Z',
+  path: '',
+  level: 'error',
+  message: 'The product [0F7081A8-EAA9-4B4D-AE8D-C18B42EF9169DH] was not found! The product [0F7081A8-EAA9-4B4D-AE8D-C18B42EF9169DH] was not found!',
+  stack: 'Not Found: The product [0F7081A8-EAA9-4B4D-AE8D-C18B42EF9169DH] was not found!\n' +
+    '    at D:\\todo-nodejs-react-vite\\packages\\backend\\src\\services\\productService.ts:50:13\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at fulfilled (D:\\todo-nodejs-react-vite\\packages\\backend\\src\\services\\productService.ts:5:58)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:95:5)'
+}
+{
+  message: 'The product [0F7081A8-EAA9-4B4D-AE8D-C18B42EF9169DH] was not found!',
+  level: 'error',
+  service: 'your-service-name',
+  timestamp: '2024-09-11 23:21:55'
+}
+{
+  toPlainObject: [Function (anonymous)],
+  name: 'Not Found',
+  status: 404,
+  timestamp: '2024-09-11 23:24:08',
+  path: '',
+  level: 'error',
+  service: 'your-service-name',
+  message: 'The product [0F7081A8-EAA9-4B4D-AE8D-C18B42EF9169DH] was not found!',
+  stack: 'Not Found: The product [0F7081A8-EAA9-4B4D-AE8D-C18B42EF9169DH] was not found!\n' +
+    '    at D:\\todo-nodejs-react-vite\\packages\\backend\\src\\services\\productService.ts:50:13\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at fulfilled (D:\\todo-nodejs-react-vite\\packages\\backend\\src\\services\\productService.ts:5:58)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:95:5)'
+}
+{
+  message: {
+    error: Not Found: The product [0F7081A8-EAA9-4B4D-AE8D-C18B42EF9169DH] was not found!
+        at D:\todo-nodejs-react-vite\packages\backend\src\services\productService.ts:50:13
+        at Generator.next (<anonymous>)
+        at fulfilled (D:\todo-nodejs-react-vite\packages\backend\src\services\productService.ts:5:58)
+        at processTicksAndRejections (node:internal/process/task_queues:95:5) {
+      toPlainObject: [Function (anonymous)],
+      status: 404,
+      timestamp: '2024-09-11T16:25:47.768Z',
+      path: ''
+    },
+    path: '/api/products/delete/0F7081A8-EAA9-4B4D-AE8D-C18B42EF9169DH'
+  },
+  level: 'error',
+  service: 'your-service-name',
+  timestamp: '2024-09-11 23:25:47'
+}

@@ -15,7 +15,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error): Partial<ErrorBoundaryState> {
+  static getDerivedStateFromError(_error: Error): Partial<ErrorBoundaryState> {
     // Update state so the next render will show the fallback UI.
     return { hasError: true };
   }
@@ -41,6 +41,6 @@ export default ErrorBoundary;
 
 function logErrorToMyService(error: Error, componentStack: string | null | undefined) {
   // Implement your logging logic here
-  // eslint-ignore @typescript-eslint/no-unused-vars
+  // eslint-ignore @typescript-eslint/no-console
   console.error("Error logged:", error, componentStack);
 }

@@ -64,7 +64,9 @@
   "dependencies": {
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
+    "frontend": "^0.0.0",
     "postcss-modules": "^6.0.0",
+    "react-draggable": "^4.4.6",
     "styled-components": "^6.1.11",
     "supertest": "^6.3.4"
   }

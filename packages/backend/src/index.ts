@@ -6,8 +6,8 @@ import path from "path";
 
 import EnvConfig from "utils/envConfig";
 import apiRoutes from "routes/apiRoutes";
-import FeatureToggleService from "services/featureToggleService";
 import { errorHandler } from "middlewares/errorHandler";
+import { logger } from "utils/logger";
 
 const envConfig = EnvConfig.getInstance();
 
@@ -24,7 +24,6 @@ app.use("/api", apiRoutes);
 app.use(errorHandler);
 
 if (envConfig.get("NODE_ENV") === "production") {
-  console.log("Middleware static file");
   // Middleware serve static file
   app.use(express.static(path.join(__dirname, "../public")));
   app.get("*", (req, res) => {
@@ -33,7 +32,7 @@ if (envConfig.get("NODE_ENV") === "production") {
 }
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  logger.info(`Server is running on port ${port}`);
 });
 
 export default app;

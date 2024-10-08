@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { LDContext, useLDClient } from "launchdarkly-react-client-sdk";
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 
 import AdminPage from "pages/AdminPage";
 import ChatBotPage from "pages/ChatBotPage";
@@ -13,19 +13,25 @@ import ProductList from "pages/ProductList";
 
 import styles from "./Index.module.css";
 import { useSnackbar } from "contexts/contexts.tsx";
+import { ProductDetail } from "pages/ProductDetail";
+import classNames from "classnames";
+import { SubPageFooter } from "components/SubPageFooter";
 
 const App = () => {
   return (
-    <Stack direction={"column"} className={styles.main}>
+    <Stack direction={"column"} className={classNames(styles.main)}>
       <header className={"flex-0"}>
         <PageHeader />
       </header>
       <main className={"flex-1"}>
-        <section>
+        <section className={"container p-20 m-auto"}>
           <Outlet />
         </section>
-        <footer>
-          <PageFooter />
+        <footer className={"border"}>
+          <PageFooter className={"container m-auto py-10"} />
+          <Box className={"border p-10"}>
+            <SubPageFooter className={"container m-auto"} />
+          </Box>
         </footer>
       </main>
     </Stack>
@@ -68,14 +74,15 @@ const AppRoutes = (): ReactElement => {
       }
     };
     evaluating().catch((e) => showSnackbar({ message: e.message, severity: "error" }));
-  }, [client]);
+  }, [client, showSnackbar]);
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path={"/"} element={<App />}>
-          <Route index path={"home"} element={<HomePage />} />
+          <Route index path={"/home"} element={<HomePage />} />
           <Route path={"list-products"} element={<ProductList />} />
+          <Route path={"product/:id"} element={<ProductDetail />} />
           {enableChat && <Route path={"chat-bot"} element={<ChatBotPage />} />}
         </Route>
         <Route path={"/admin"} element={<AdminLayout />}>

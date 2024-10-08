@@ -1,11 +1,9 @@
-// ProductForm.tsx
 import React, { useState } from "react";
 import { TextField, Button, Box } from "@mui/material";
+
 import { ProductRequest } from "apis/product/type";
 import { useAddNewProductMutation } from "apis/product/client.ts";
 import { useSnackbar } from "contexts/contexts.tsx";
-import { useAppDispatch } from "store/hooks.ts";
-import { addNewProduct } from "store/product/slice.ts";
 
 const ProductForm: React.FC = () => {
   const [addMutation] = useAddNewProductMutation();
@@ -27,8 +25,6 @@ const ProductForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
-    // Handle form submission logic here
     try {
       await addMutation(formData).unwrap();
     } catch (e) {
@@ -56,7 +52,7 @@ const ProductForm: React.FC = () => {
           Save
         </Button>
         <Button type="button" variant="outlined" color="secondary" onClick={handleCancel}>
-          Cancel
+          Clear
         </Button>
       </Box>
     </Box>

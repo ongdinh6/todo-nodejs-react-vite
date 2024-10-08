@@ -6,12 +6,13 @@ import { withLDProvider } from "launchdarkly-react-client-sdk";
 import AppRoutes from "App.tsx";
 import { EnvConfig } from "envConfig.ts";
 
-import "./App.css";
 import ErrorBoundary from "ErrorBoundary.tsx";
 import { SnackbarProvider } from "contexts/contexts.tsx";
-import InternalServerErrorPage from "pages/InternalServerErrorPage";
+import InternalServerErrorPage from "pages/ErrorPage/InternalServerErrorPage";
 import { Provider } from "react-redux";
 import { store } from "store/store.ts";
+
+import "./App.css";
 
 const App = () => {
   return (

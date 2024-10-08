@@ -44,7 +44,7 @@ const SnackbarItem = ({ props, index, onClose }: SnackbarItemProps) => {
       onClose={handleAutoDismissed}
     >
       <Alert onClose={() => onClose(props.id)} severity={props.severity}>
-       <div dangerouslySetInnerHTML={{ __html: props.message  }} />
+        <div dangerouslySetInnerHTML={{ __html: props.message }} />
       </Alert>
     </Snackbar>
   );

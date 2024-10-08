@@ -1,11 +1,15 @@
 import React, { ReactElement } from "react";
-import { Box } from "@mui/material";
+import { FeaturedCategories } from "components/FeaturedCategories";
+import { BestSellingBooks } from "components/BestSellingBooks";
+import { FeaturedBooks } from "components/FeaturedBooks";
 
 const HomePage = (): ReactElement => {
   return (
-    <Box>
-      <p>Home Page</p>
-    </Box>
+    <>
+      <FeaturedCategories />
+      <BestSellingBooks />
+      <FeaturedBooks />
+    </>
   );
 };
 

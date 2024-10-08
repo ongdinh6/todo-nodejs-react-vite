@@ -5,6 +5,7 @@ import { ProductRepository } from "repositories/productRepository";
 import { ProductRequest } from "models/requests/productRequest";
 import { ProductModel } from "database/models/product";
 import { NotFoundError } from "errors/notFoundError";
+import { DeleteItemStatus } from "models/responses/deleteItemStatus";
 
 export class ProductService {
   static readonly getProducts = async (
@@ -13,6 +14,14 @@ export class ProductService {
     const productModels = await ProductRepository.getProducts(searchParameter);
     const products = productModels.map((product) => product.toResponse());
     return new PaginatedResult<Product>(products, searchParameter?.page ?? DEFAULT_PAGE);
+  };
+
+  static readonly getProduct = async (id: string): Promise<Product> => {
+    const productModel = await ProductRepository.getOneById(id);
+    if (!productModel) {
+      throw new NotFoundError(`Not found the product has id [${id}]`);
+    }
+    return productModel.toResponse();
   };
 
   static readonly createNewProduct = async (payload: ProductRequest): Promise<Product> => {
@@ -35,17 +44,16 @@ export class ProductService {
     return updatedProduct.toResponse();
   };
 
-  static readonly deleteProduct = async (id: string): Promise<string> => {
+  static readonly deleteProduct = async (id: string): Promise<DeleteItemStatus> => {
     const productModel = await ProductRepository.getOneById(id);
     if (!productModel) {
       throw new NotFoundError(`The product [${id}] was not found!`);
     }
-    try {
-      await productModel.destroy();
-      return `The product ${productModel.name} has been deleted successfully!`;
-    } catch (e) {
-      console.error(`Deleting the product ${productModel.name} encountered an error!`, e);
-      return `Deleting the product ${productModel.name} encountered an error!`;
-    }
-  }
+
+    await productModel.destroy();
+    return {
+      item: id,
+      message: `The product ${productModel?.name} has been deleted successfully!`,
+    };
+  };
 }

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Box, Button, Grid } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Button, Card, Grid, Typography } from "@mui/material";
 
 import CommentCard from "components/shared/CommentCard";
 import SearchInput from "components/shared/SearchInput";
@@ -8,6 +8,8 @@ import ProductDialog from "components/ProductDialog";
 import styles from "./styles.module.css";
 import { useGetProductsQuery } from "apis/product/client.ts";
 import Spinner from "components/shared/Spinner";
+import InternalServerErrorPage from "pages/ErrorPage/InternalServerErrorPage";
+import { Product } from "apis/product/type";
 
 const ProductList = () => {
   const { data: paginatedResult, isFetching, error } = useGetProductsQuery(undefined);
@@ -17,7 +19,11 @@ const ProductList = () => {
     return <Spinner />;
   }
 
-  const handleOpenModal = (modal: string) => {
+  if (error) {
+    return <InternalServerErrorPage />;
+  }
+
+  const handleOpenModal = (modal: string | null) => {
     setModal(modal);
   };
 
@@ -30,18 +36,16 @@ const ProductList = () => {
         </Button>
       </Grid>
 
-      {paginatedResult?.data.map((product: any) => (
-        <CommentCard
-          key={product.id}
-          id={product.id}
-          name={product.name}
-          date={product.createdAt}
-          comment={product.description}
-          avatarUrl="https://example.com/avatar.jpg"
-        />
+      {paginatedResult?.products.map((product: any) => (
+        <Card>
+          <img src={product.thumbnail}/>
+          <Typography variant={"h5"}>{product.title}</Typography>
+          <Typography variant={"h6"}>${product.price}</Typography>
+          <Typography variant={"subtitle"}>Description: {product.description}</Typography>
+        </Card>
       ))}
 
-      {modal === "create" && <ProductDialog open={true} />}
+      {modal === "create" && <ProductDialog open={true} onClose={() => handleOpenModal(null)} />}
     </Box>
   );
 };

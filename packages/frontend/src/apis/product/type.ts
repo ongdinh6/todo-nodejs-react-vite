@@ -1,4 +1,6 @@
 // Requests
+import { AnyType } from "constant.ts";
+
 export interface ProductRequest {
   name: string;
   description: string;
@@ -26,4 +28,9 @@ export interface PaginatedResult<T> {
   currentPage: number;
   itemsPerPage: number;
   totalPage: number;
+}
+
+export interface DeleteItemStatus {
+  item: AnyType;
+  message: string;
 }
